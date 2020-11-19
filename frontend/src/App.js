@@ -5,10 +5,12 @@ import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Home from './index';
+import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 
 const App = () => {
   return (
     <Provider store={store}>
+      <GoogleMapsWrapper />
       <Router>
         <nav>
           NAV Here
