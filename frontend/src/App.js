@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
+import AssociateRegistration from './components/AssociateRegistration/AssociateRegistration';
 
 const App = () => {
   const [mapStatus, setMapStatus]= useState(false);
@@ -22,6 +23,9 @@ const App = () => {
           </Route>
           <Route path='/driverPortal'>
             <DriverPortal mapStatus={mapStatus} />
+          </Route>
+          <Route path='/associateRegistration'>
+            <AssociateRegistration mapStatus={mapStatus}/>
           </Route>
         </Switch>
         <footer>
