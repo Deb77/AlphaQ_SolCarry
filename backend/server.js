@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const colors = require('colors');
 
+const customerRoutes = require('./routes/customerRoutes');
+const businessRoutes = require('./routes/businessRoutes');
+const driverRoutes = require('./routes/driverRoutes');
+
 const app = express();
 require('dotenv').config();   
 
@@ -19,4 +23,10 @@ mongoose.connect(uri, {
     useFindAndModify: false 
 });
 
-app.listen(port, () => console.log(colors.bold.cyan(`Server running on port ${port}`)));
+app.use('/customer', customerRoutes);
+app.use('/business', businessRoutes);
+app.use('/driver', driverRoutes);
+
+app.listen(port, () =>
+    console.log(colors.bold.cyan(`Server running on port ${port}`))
+);
