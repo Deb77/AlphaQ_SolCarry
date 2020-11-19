@@ -26,8 +26,7 @@ const driverSchema = Schema({
     },
     lat: { type: String },
     long: { type: String },
-    available: { type: Boolean, default: false },
-    time: { type: Date, default: Date.now()}
+    available: { type: Boolean, default: false }
 },
     { timestamps: true }
 );
