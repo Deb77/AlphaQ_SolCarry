@@ -30,8 +30,7 @@ const ConfirmPassword = ({Cpassword}) => {
     };
 
     return (
-        <FormControl variant="outlined" disabled={Cpassword===''}>
-            <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+        <FormControl disabled={Cpassword===''}>
             <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}

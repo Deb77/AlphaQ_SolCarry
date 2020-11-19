@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import { FormControl, OutlinedInput } from '@material-ui/core';
 
 const Email = ({email, setEmail}) => {
     const [invalidEmail, setInvalidEmail]= useState(false);
@@ -12,16 +11,10 @@ const Email = ({email, setEmail}) => {
     }
 
     return (
-        <>
-        <TextField value={email} onChange={handleChange}
-        label="Email" variant="outlined" />
-        {
-            invalidEmail?
-            <FormHelperText error>
-                Please Enter a valid email
-            </FormHelperText>:null    
-        }
-        </>
+        <FormControl>
+            <OutlinedInput value={email} onChange={handleChange}
+            label="Email" variant="outlined" />
+        </FormControl>
     );
 }
 

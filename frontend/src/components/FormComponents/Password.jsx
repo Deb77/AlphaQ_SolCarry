@@ -20,7 +20,6 @@ const Password = ({password,setPassword}) => {
 
     return (
         <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}

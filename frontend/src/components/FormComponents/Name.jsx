@@ -1,10 +1,12 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import { FormControl, OutlinedInput } from '@material-ui/core';
 
 const Name = ({name, setName}) => {
     return (
-        <TextField value={name} onChange={(e)=>setName(e.target.value.trim())}
-        id="outlined-basic" label="Name" variant="outlined" />
+        <FormControl>
+        <OutlinedInput value={name} onChange={(e)=>setName(e.target.value.trim())}
+        label="Name" variant="outlined" />
+        </FormControl>
     );
 }
 
