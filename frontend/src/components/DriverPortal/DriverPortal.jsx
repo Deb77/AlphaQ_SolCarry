@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import Map from './Map';
+import Map from '../SelectLocationOnMap/Map';
 
 const useStyles= makeStyles({
     container:{
@@ -47,10 +47,29 @@ const useStyles= makeStyles({
 
 const DriverPortal = ({ mapStatus }) => {
     const [name, setName]= useState('Benito');
+    const [updatedTime, setUpdatedTime]= useState(new Date() );
     const [location, setLocation]= useState({
         lat: 15.292158,
         lng: 73.969542
     });
+
+    const handleLocationUpdate= ()=>{
+        let geocoder= new window.google.maps.Geocoder();
+        geocoder.geocode({location},(result, status)=>{
+            if(status !=='OK')
+                alert('Something went wrong')
+            else{
+                var r = new RegExp(' Goa ');
+                if(r.test(result[0].formatted_address)){
+                    setUpdatedTime(new Date());
+                    //api call
+                }
+                else{
+                    alert('Please select a location within Goa')
+                }
+            }
+        })
+    }
 
     const styles= useStyles();
     return (
@@ -68,10 +87,17 @@ const DriverPortal = ({ mapStatus }) => {
                 <h1>Loading</h1>
             }
             <div className={styles.details2}>
-                <Button className={styles.submitButton} variant="contained" color="primary">
+                <Button onClick={handleLocationUpdate}
+                className={styles.submitButton} variant="contained" color="primary">
                     Update Location
                 </Button>
-                <p className={styles.lastUpdated}>Last update at 21:00 on 13/03/2020</p>
+                <p className={styles.lastUpdated}>
+                    {
+                    `Last update at\
+                    ${updatedTime.getHours().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}:${updatedTime.getMinutes().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}\
+                    on ${updatedTime.getDate().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}/${(updatedTime.getMonth() + 1).toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}/${updatedTime.getFullYear().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}`
+                    }
+                </p>
             </div>
         </div>
     );

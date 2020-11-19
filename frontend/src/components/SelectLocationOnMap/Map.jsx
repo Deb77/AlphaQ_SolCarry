@@ -1,5 +1,12 @@
 import React,{useEffect, useState} from 'react';
-import { GoogleMap, Marker } from "@react-google-maps/api"
+import { GoogleMap, Marker } from "@react-google-maps/api";
+
+const GOA_BOUNDS={
+    north: 15.83,
+    south: 14.92,
+    west: 73.6,
+    east: 74.36,
+};
 
 const Map = ({location, setLocation}) => {
     const [currentLocation, setCurrentLocation]= useState({
@@ -33,13 +40,23 @@ const Map = ({location, setLocation}) => {
     };
 
     const handleClick= (e)=>{
-        console.log(e);
+        setLocation({
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()    
+        })
     }
 
     return (
         <GoogleMap
         onClick={handleClick}
-        zoom= {5}
+        options={
+            {restriction: {
+            latLngBounds: GOA_BOUNDS,
+            strictBounds: false,
+            }
+            }
+        }
+        zoom={1}
         mapContainerStyle={{height:'500px', width: '100%'}}
         center={currentLocation}>
             <Marker position={location} />
