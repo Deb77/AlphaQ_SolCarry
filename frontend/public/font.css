@@ -1,0 +1,13 @@
+/* font converted using font-converter.net. thank you! */
+@font-face {
+  font-family: "weasthood";
+  src: url("./fonts/weasthood.eot"); /* IE9 Compat Modes */
+  src: url("./fonts/weasthood.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("./fonts/weasthood.otf") format("opentype"), /* Open Type Font */
+    url("./fonts/weasthood.svg") format("svg"), /* Legacy iOS */
+    url("./fonts/weasthood.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("./fonts/weasthood.woff") format("woff"), /* Modern Browsers */
+    url("./fonts/weasthood.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
