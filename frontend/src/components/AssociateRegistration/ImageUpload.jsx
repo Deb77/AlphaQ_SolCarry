@@ -1,7 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Modal from 'react-modal';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import ImageUploader from 'react-images-upload';
+
+import {ReactComponent as CloseButton} from '../../Assets/close-black-18dp.svg';
+import FileUploader from './FileUploader';
 
 const useStyle= makeStyles({
     modal:{
@@ -26,7 +30,9 @@ const customStyles = {
 
 const ImageUpload = () => {
     var subtitle;
-    const [modalIsOpen,setIsOpen] = React.useState(false);
+    const [modalIsOpen,setIsOpen] = useState(false);
+    const [pictures, setPictures] = useState([]);
+
     function openModal() {
       setIsOpen(true);
     }
@@ -40,27 +46,31 @@ const ImageUpload = () => {
       setIsOpen(false);
     }
 
+    const onDrop = picture => {
+        setPictures([...pictures, picture]);
+    };
+
     const styles= useStyle();
     return (
         <>
         <button onClick={openModal}>Open Modal</button>
-        <Modal style={customStyles}
+        <Modal //style={customStyles}
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           contentLabel="Example Modal"
         >
- 
-          <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+            <IconButton onClick={closeModal}>
+                <CloseButton />
+            </IconButton>
+          <h2 ref={_subtitle => (subtitle = _subtitle)}>Upload Images</h2>
+            <ImageUploader
+            withPreview={true}
+            withIcon={true}
+            onChange={onDrop}
+            imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+            maxFileSize={5242880}
+            />
         </Modal>
         </>
     );
