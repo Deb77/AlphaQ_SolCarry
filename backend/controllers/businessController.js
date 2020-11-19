@@ -30,7 +30,7 @@ module.exports.signup_post = async(req, res) => {
     try {
         const business = await Business.create(req.body);
         const token = authToken.createToken(business);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user:business._id });
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -44,7 +44,7 @@ module.exports.login_post = async (req, res) => {
         const business = await Business.login(email, password);
         const token = authToken.createToken( business );
         console.log(token);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user:business._id });
     }
     catch (err) {
         const errors = handleErrors(err);

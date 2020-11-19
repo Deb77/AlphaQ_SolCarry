@@ -30,7 +30,7 @@ module.exports.signup_post = async(req, res) => {
     try {
         const driver = await Driver.create(req.body);
         const token = authToken.createToken(driver);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user: { id: driver._id, updatedAt: driver.updatedAt } });
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -44,7 +44,7 @@ module.exports.login_post = async (req, res) => {
         const driver = await Driver.login(email, password);
         const token = authToken.createToken( driver );
         console.log(token);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user:driver._id });
     }
     catch (err) {
         const errors = handleErrors(err);
