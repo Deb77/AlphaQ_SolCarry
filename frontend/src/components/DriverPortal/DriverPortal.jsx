@@ -42,6 +42,10 @@ const useStyles= makeStyles({
     lastUpdated:{
         margin: '10px 0',
         fontWeight: '500'
+    },
+    smallText:{
+        margin: '0',
+        fontSize: '11px'
     }
 });
 
@@ -54,6 +58,9 @@ const DriverPortal = ({ mapStatus }) => {
     });
 
     const handleLocationUpdate= ()=>{
+        if(!mapStatus){ //map not initialised yet
+            return null
+        }
         let geocoder= new window.google.maps.Geocoder();
         geocoder.geocode({location},(result, status)=>{
             if(status !=='OK')
@@ -98,6 +105,7 @@ const DriverPortal = ({ mapStatus }) => {
                     on ${updatedTime.getDate().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}/${(updatedTime.getMonth() + 1).toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}/${updatedTime.getFullYear().toLocaleString('en-IN', {minimumIntegerDigits: 2, useGrouping:false})}`
                     }
                 </p>
+                <p className={styles.smallText}>(Drop a marker at your current location)</p>
             </div>
         </div>
     );
