@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import Home from './index';
-
 const App = () => {
   return (
     <Provider store={store}>
@@ -15,7 +13,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route path='/'>
-            <Home />
+            <p style={{fontFamily: 'weasthood', fontSize: '48px'}}> HEYYYYYYYYYYY </p>
           </Route>
         </Switch>
         <footer>
