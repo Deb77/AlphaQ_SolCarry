@@ -26,6 +26,17 @@ const handleErrors = (err) => {
     return errors;
 }
 
+module.exports.find_all_get = async (req, res) => {
+    try {
+        const business = await Business.find();
+        res.status(201).json( business )
+    }
+    catch(err){
+        res.status(400).json("You don't have any items registered/There is connection problem");
+    }
+}
+
+
 module.exports.signup_post = async(req, res) => {
     try {
         const business = await Business.create(req.body);
@@ -51,3 +62,13 @@ module.exports.login_post = async (req, res) => {
         res.status(400).json({ errors: errors });
     }
 };
+
+module.exports.filter_get = async (req, res) => {
+    try {
+        const businesses = await Business.find(req.body);
+        res.status(201).json( businesses )
+    }
+    catch(err){
+        res.status(400).json("You don't have any items registered/There is connection problem");
+    }
+}

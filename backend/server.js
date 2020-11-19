@@ -14,7 +14,7 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3003;
 const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {

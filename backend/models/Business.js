@@ -35,6 +35,10 @@ const businessSchema = Schema({
     type: {
         type: String,
         required: [true, 'Please select the type of your business'],
+    },
+    image: {
+        type: String,
+        required: [true, 'Please add an image of your business']
     }
 },
     { timestamps: true }
