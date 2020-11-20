@@ -5,6 +5,7 @@ import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './pages/Home/home';
 import restaurant from './components/restaurantcontent';
+import cart from './components/Cart';
 
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/' exact component={Home}>
           </Route>
           <Route exact path="/restaurant/:restName" component={restaurant} />
+          <Route exact path="/cart" component={cart} />
         </Switch>
         {/* <footer>
           Footer Here
