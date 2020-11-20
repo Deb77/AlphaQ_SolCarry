@@ -1,5 +1,6 @@
 //react
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { useSelector } from "react-redux";
 
 //M-UI
@@ -25,20 +26,18 @@ const useStyles = makeStyles({
     }
   });
 const RestaurantContent = () => {
+  const [restaurantArray, setRestaurantArray] = useState([]);
+  useEffect(() => {
+    axios.get('https://solcarry-backend.herokuapp.com/business')
+    .then(res => setRestaurantArray(res.data))
+  }, [])
+  // const restaurantArray = [
+
+  // ]
 //   const { restaurants } = useSelector((state) => state.data);
 //   const restaurantArray = restaurants.restaurants;
 const classes = useStyles();
-   const restaurantArray = [
-    {"name": "Adlem Goi Bar And Restaurant", "tags": ["Chinese, ", "North Indian."],"imageUrl":"https://i.ibb.co/pKbdPmQ/Screenshot-5.png", "_id": "01", },
-    {"name": "Sanman Restuarant And Bar", "tags": ["Goan, ", "North Indian."],"imageUrl":"https://i.ibb.co/St0hVMr/139-1393968-restaurant-bar-wallpaper-modern-restaurant-design-ideas.jpg", "_id": "02", },
-    {"name": "Annapurna Multi Cuisine Family Restaurant with Bar", "tags": ["Chinese, ", "Goan, ", "North Indian,"],"imageUrl":"https://i.ibb.co/9tczZMm/Restaurant-Images-HD.jpg", "_id": "03", },
-    {"name": "Adlem Goi Bar And Restaurant", "tags": ["Chinese, ", "North Indian."],"imageUrl":"https://i.ibb.co/v1BZQD3/1000x-1.jpg", "_id": "01", },
-    {"name": "Sanman Restuarant And Bar", "tags": ["Goan, ", "North Indian."],"imageUrl":"https://i.ibb.co/Ny95bDB/eresto-images1.jpg", "_id": "02", },
-    {"name": "Annapurna Multi Cuisine Family Restaurant with Bar", "tags": ["Chinese, ", "Goan, ", "North Indian,"],"imageUrl":"https://i.ibb.co/rHfG4BD/oFCSY3.jpg", "_id": "03", },
-    {"name": "Adlem Goi Bar And Restaurant", "tags": ["Chinese, ", "North Indian."],"imageUrl":"https://i.ibb.co/pKbdPmQ/Screenshot-5.png", "_id": "01", },
-    {"name": "Sanman Restuarant And Bar", "tags": ["Goan, ", "North Indian."],"imageUrl":"https://i.ibb.co/9tczZMm/Restaurant-Images-HD.jpg", "_id": "02", },
-    {"name": "Annapurna Multi Cuisine Family Restaurant with Bar", "tags": ["Chinese, ", "Goan, ", "North Indian,"],"imageUrl":"https://i.ibb.co/St0hVMr/139-1393968-restaurant-bar-wallpaper-modern-restaurant-design-ideas.jpg", "_id": "03", },
-  ]
+
   const getRestaurantCard = (restaurantObj) => {
     return (
       <Grid item xs={12} sm={4} key={restaurantObj._id} >
@@ -49,7 +48,7 @@ const classes = useStyles();
   return (
     <>
       <Box display="flex" className={classes.cards}>
-      <Grid container spacing={2} >
+      <Grid container spacing={3} >
         {restaurantArray ? (
           restaurantArray.length > 0 ? (
             restaurantArray.map((restaurant) => getRestaurantCard(restaurant))

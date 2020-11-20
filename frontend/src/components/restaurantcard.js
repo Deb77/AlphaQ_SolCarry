@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
     rootc: {
-        maxWidth: 400,
+        Width: 400,
         textDecoration: 'none',
         marginBottom: 50,
         height:380,
@@ -33,8 +33,8 @@ export default function RestaurantCard(props) {
     const classes = useStyles();
     const {
       name,
-      tags,
-      imageUrl,
+      description,
+      image,
       _id,
     } = props;
   
@@ -57,7 +57,7 @@ export default function RestaurantCard(props) {
             >
                 <CardMedia
                 className={classes.mediac}
-                image={imageUrl}
+                image={image}
                 title="Contemplative Reptile"
                 />
                 <CardContent>
@@ -65,7 +65,7 @@ export default function RestaurantCard(props) {
                 {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" className={classes.linkt}>
-                {tags}
+                {description}
                 </Typography>
                 </CardContent>
             </Link>
