@@ -93,7 +93,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const Cart = ({ items, setItems,mapStatus}) => {
+const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
     const history = useHistory();
 
     const [total, setTotal] = useState(0);
@@ -113,15 +113,20 @@ const Cart = ({ items, setItems,mapStatus}) => {
     }, [items])
 
     useEffect(()=>{
-        const options={
-            origins: [{ //driverlocation, restauramt
-                lat: 0, 
-                lng: 0 
-            }],
-            destinations: [location], //.[restaurantlocation, user location]
-            travelMode: 'DRIVING',
-        }      
-        if(mapStatus){
+        if(driver)
+            setDriverName(driver.name)
+    },[driver])
+
+    useEffect(()=>{    
+        if(mapStatus && businessDeails && driver){
+            const options={
+                origins: [{ //driverlocation, restauramt
+                    lat: 0, 
+                    lng: 0 
+                },{lat: parseFloat(businessDeails.lat), long: parseFloat(businessDeails.long)}],
+                destinations: [{lat: parseFloat(businessDeails.lat), long: parseFloat(businessDeails.long)},location], //.[restaurantlocation, user location]
+                travelMode: 'DRIVING',
+            }  
             var service = new window.google.maps.DistanceMatrixService();
             service.getDistanceMatrix(options, (response, status)=>{
                 console.log(response)
@@ -134,17 +139,7 @@ const Cart = ({ items, setItems,mapStatus}) => {
                 }
             });
         }
-    },[location])
-
-    useEffect(()=>{
-        if(modalOpen){
-            axios.post('https://solcarry-backend.herokuapp.com/driver/closest',{
-                lat: location.lat.toString(),
-                long: location.lng.toString()
-            })
-            .then((response)=>setDriver(response.data))
-        }
-    },[modalOpen]);
+    },[location,mapStatus,businessDeails,driver])
 
     const secondsToHms=()=> {
         if(totalTime===0)
@@ -165,8 +160,13 @@ const Cart = ({ items, setItems,mapStatus}) => {
 
     const driverPageRedirect= ()=>{
         setModalOpen(true)
+        axios.post('https://solcarry-backend.herokuapp.com/driver/closest',{
+            lat: businessDeails.lat,
+            long: businessDeails.long
+        })
+        .then((response)=>setDriver(response.data))
     }
-    
+
     const handleSubmit= ()=>{
         if(!mapStatus){ //map not initialised yet
             return null
@@ -179,6 +179,7 @@ const Cart = ({ items, setItems,mapStatus}) => {
                 var r = new RegExp(' Goa ');
                 //console.log(result)
                 if(r.test(result[0].formatted_address)){
+                    setItems([]);
                     history.push("/restautantPortal");
                 }
                 else{

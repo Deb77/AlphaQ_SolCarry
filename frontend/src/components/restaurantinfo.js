@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 //redux
 import { useSelector } from "react-redux";
 
@@ -21,6 +21,7 @@ import Button from '@material-ui/core/Button';
 // import IMG from '../images/burger.png';
 import Navbar from './navbar';
 import Item from './ItemCard';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   rightheading: {
@@ -42,18 +43,27 @@ const useStyles = makeStyles({
   },
 });
 
-function Restaurant(props) {
+const Items= [{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},]
+
+function Restaurant({setItems}) {
   const classes = useStyles();
-//   const { loading } = useSelector((state) => state.data);
+  //const [restaurantArray, setRestaurantArray]= useState([])
 
-  // const getRest = {
+  const addItem= (item)=>{
+    setItems((prevState)=>([...prevState, {
+      name: item.name,
+      img: item.image,
+      price: item.price,
+      quantity: 1
+    }]))
+  };
 
-  // }
   const restaurantArray = [
     {"name": "AJ's"}, {"desc": "Hello"},{"imageUrl":"https://i.ibb.co/pKbdPmQ/Screenshot-5.png"}, {"_id": "01"}, 
   ]
   return (
     <>
+    <Link to='/cart'>CART</Link>
           <Navbar />
           {/* <Grid container direction="row">
             <Grid item xs={false} sm={1} />
@@ -116,40 +126,14 @@ function Restaurant(props) {
             </Grid>
             <Typography style={{fontSize: 30, marginTop: 60,marginLeft: 150,}}>Add Items into Cart</Typography>  
             <Grid container>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
+              {
+                Items.map((value, id)=>(
+                  <Grid item xs={4} key={id} onClick={()=>addItem(value)}>
+                   <Item details={value}/>
+                  </Grid>
+                ))
+              }
             </Grid>
-            <Grid container>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-              <Grid item xs={4}>
-                <Item />
-              </Grid>
-            </Grid>
-          
-          
     </>
   );
 }

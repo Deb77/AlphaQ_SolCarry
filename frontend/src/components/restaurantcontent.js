@@ -25,7 +25,7 @@ const useStyles = makeStyles({
         paddingBottom: 180,
     }
   });
-const RestaurantContent = () => {
+const RestaurantContent = ({setBusinessDeails}) => {
   const [restaurantArray, setRestaurantArray] = useState([]);
   useEffect(() => {
     axios.get('https://solcarry-backend.herokuapp.com/business')
@@ -40,7 +40,7 @@ const classes = useStyles();
 
   const getRestaurantCard = (restaurantObj) => {
     return (
-      <Grid item xs={12} sm={4} key={restaurantObj._id} >
+      <Grid item xs={12} sm={4} key={restaurantObj._id} onClick={()=>setBusinessDeails(restaurantObj)} >
         <RestaurantCard {...restaurantObj} />
       </Grid>
     );

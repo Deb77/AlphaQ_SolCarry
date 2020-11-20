@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './pages/Home/home';
-import restaurant from './components/restaurantinfo';
+import Restaurant from './components/restaurantinfo';
 import Login from "./components/Login/login";
 import Cart from './components/Cart';
 
@@ -47,6 +47,7 @@ const App = () => {
     price: 500,
     quantity: 1,
     }]);
+  const [businessDeails, setBusinessDeails]= useState(null);
 
   return (
     <Provider store={store}>
@@ -71,15 +72,17 @@ const App = () => {
           <Route path='/driverRegistration'>
             <DriverRegistration />
           </Route>
-          <Route path='/' exact component={Home}>
+          <Route path='/' exact render={()=><Home mapStatus={mapStatus} setBusinessDeails={setBusinessDeails} />}>
           </Route>
           <Route path='/login' exact component={Login}>
           </Route>
-          <Route exact path="/cart">
-          <Cart items={items} setItems={setItems} mapStatus={mapStatus} />
-          </Route>
+          <Route exact path="/cart"
+          render={()=>(
+          <Cart items={items} setItems={setItems} mapStatus={mapStatus} businessDeails={businessDeails}/>)}
+          />
           <Route exact path="/hooray" component={Confirmation} />
-          <UserRoute exact path="/restaurant/:restName" component={restaurant} />
+          <Route exact path="/Business/:restName" 
+          render={()=><Restaurant setItems={setItems} />} />
           
         </Switch>
         {/* <footer>
