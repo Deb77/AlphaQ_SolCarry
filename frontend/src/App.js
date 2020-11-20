@@ -8,6 +8,7 @@ import restaurant from './components/restaurantcontent';
 
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
+import RestaurantPortal from './pages/RestaurantPortal/RestaurantPortal';
 import AssociateRegistration from './components/AssociateRegistration/AssociateRegistration';
 import UserRegistration from './pages/UserRegistration/UserRegistration';
 import DriverRegistration from './pages/DriverRegistration/DriverRegistration';
@@ -24,6 +25,9 @@ const App = () => {
         <Switch>
           <Route path='/driverPortal'>
             <DriverPortal mapStatus={mapStatus} />
+          </Route>
+          <Route path='/restaurantPortal'>
+            <RestaurantPortal />
           </Route>
           <Route path='/associateRegistration'>
             <AssociateRegistration mapStatus={mapStatus}/>

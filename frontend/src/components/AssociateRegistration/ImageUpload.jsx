@@ -49,19 +49,13 @@ const useStyle= makeStyles({
 });
 
 const ImageUpload = ({setImgageUrl}) => {
-    var subtitle;
     const [modalIsOpen,setIsOpen] = useState(false);
     const [pictures, setPictures] = useState([]);
 
     function openModal() {
       setIsOpen(true);
     }
-   
-    function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
-    }
-   
+      
     function closeModal(){
       setIsOpen(false);
     }

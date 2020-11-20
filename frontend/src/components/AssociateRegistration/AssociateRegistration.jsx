@@ -6,7 +6,6 @@ import Password from '../FormComponents/Password';
 import ConfirmPassword from '../FormComponents/ConfirmPassword';
 import Email from '../FormComponents/Email';
 import Name from '../FormComponents/Name';
-import { Button } from '@material-ui/core';
 import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
 import ImageUpload from './ImageUpload';
