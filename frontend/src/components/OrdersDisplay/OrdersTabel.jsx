@@ -6,12 +6,25 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  root: {
+    marginTop: 30,
+    maxWidth:900
+  },
+  bold: {
+    fontWeight:'bold'
+  },
+  container: {
+    border: '1px solid red',
+    borderRadius: '10px',
+    boxShadow:'0 0 5px red'
+  }
 });
 
 function createData(name, calories, fat, carbs, protein) {
@@ -30,14 +43,15 @@ export default function BasicTable() {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
+    <Container className={classes.root}>
+      <TableContainer className={classes.container}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell >Order Id</TableCell>
-            <TableCell align="right">Time</TableCell>
-            <TableCell align="right">Deails</TableCell>
-            <TableCell align="right">Price</TableCell>
+            <TableCell className={classes.bold}>Order Id</TableCell>
+            <TableCell className={classes.bold} align="right">Time</TableCell>
+            <TableCell className={classes.bold} align="right">Deails</TableCell>
+            <TableCell className={classes.bold} align="right">Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,5 +66,6 @@ export default function BasicTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    </Container>
   );
 }

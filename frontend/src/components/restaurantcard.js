@@ -53,7 +53,6 @@ export default function RestaurantCard(props) {
                 restId: _id,
                 },
             }}
-            
             >
                 <CardMedia
                 className={classes.mediac}
