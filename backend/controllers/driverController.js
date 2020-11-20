@@ -30,7 +30,7 @@ module.exports.signup_post = async(req, res) => {
     try {
         const driver = await Driver.create(req.body);
         const token = authToken.createToken(driver);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user: { id: driver._id, updatedAt: driver.updatedAt } });
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -44,7 +44,7 @@ module.exports.login_post = async (req, res) => {
         const driver = await Driver.login(email, password);
         const token = authToken.createToken( driver );
         console.log(token);
-        res.status(201).json({ token: token });
+        res.status(201).json({ token: token, user:driver._id });
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -55,9 +55,9 @@ module.exports.login_post = async (req, res) => {
 module.exports.stats_update = async (req, res) => {
     try {
         await Driver.findByIdAndUpdate(req.params.id, req.body);
-        res.status(201).json("The drive's information has been updated successfully");
+        res.status(201).json("The driver's information has been updated successfully");
     }
     catch (err) {
-        console.log(err);
+        res.status(400).json("We were unable to update");
     }
 };

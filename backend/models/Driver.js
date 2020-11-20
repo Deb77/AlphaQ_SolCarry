@@ -24,8 +24,14 @@ const driverSchema = Schema({
         required: [true, 'Please enter a password'],
         minlength: [6, 'Minimum password length should be 6 characters'],
     },
-    lat: { type: String },
-    long: { type: String },
+    lat: {
+        type: String,
+        required:true
+    },
+    long: {
+        type: String,
+        required: true
+    },
     available: { type: Boolean, default: false }
 },
     { timestamps: true }
