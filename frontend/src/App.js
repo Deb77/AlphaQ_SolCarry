@@ -29,24 +29,7 @@ export const UserRoute = ({ component: Component, ...rest }) => {
 };
 const App = () => {
   const [mapStatus, setMapStatus]= useState(false);
-  const [items, setItems] = useState([{
-    name: "Manchhurian",
-    img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    price: 400,
-    quantity: 1,
-  },
-  {
-    name: "Chicken 65",
-    img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    price: 40,
-    quantity: 1,
-  },
-  {
-    name: "Kebabs",
-    img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-    price: 500,
-    quantity: 1,
-    }]);
+  const [items, setItems] = useState([]);
   const [businessDeails, setBusinessDeails]= useState(null);
 
   return (
@@ -82,7 +65,7 @@ const App = () => {
           />
           <Route exact path="/hooray" component={Confirmation} />
           <Route exact path="/Business/:restName" 
-          render={()=><Restaurant setItems={setItems} />} />
+          render={()=><Restaurant setItems={setItems} businessDeails={businessDeails} />} />
           
         </Switch>
         {/* <footer>

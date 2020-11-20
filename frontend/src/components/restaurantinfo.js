@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 //redux
 import { useSelector } from "react-redux";
 
@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import Navbar from './navbar';
 import Item from './ItemCard';
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 const useStyles = makeStyles({
   rightheading: {
@@ -43,13 +44,21 @@ const useStyles = makeStyles({
   },
 });
 
-const Items= [{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},{name:'food', price: '100', image:'https://i.ibb.co/wNrV34C/burger.png'},]
-
-function Restaurant({setItems}) {
+function Restaurant({setItems,businessDeails}) {
   const classes = useStyles();
-  //const [restaurantArray, setRestaurantArray]= useState([])
+  const [DisplayItems, setDisplayItems]= useState([])
 
-  const addItem= (item)=>{
+  useEffect(()=>{
+    Axios.get('https://solcarry-backend.herokuapp.com/item',{
+      businessId: businessDeails._id
+    })
+    .then(response=>setDisplayItems(response.data))
+  },[businessDeails])
+
+  const addItem= (item,id)=>{
+    let updatedDisplayItems= [...DisplayItems]
+    updatedDisplayItems.splice(id,1);
+    setDisplayItems(updatedDisplayItems)
     setItems((prevState)=>([...prevState, {
       name: item.name,
       img: item.image,
@@ -58,9 +67,6 @@ function Restaurant({setItems}) {
     }]))
   };
 
-  const restaurantArray = [
-    {"name": "AJ's"}, {"desc": "Hello"},{"imageUrl":"https://i.ibb.co/pKbdPmQ/Screenshot-5.png"}, {"_id": "01"}, 
-  ]
   return (
     <>
     <Link to='/cart'>CART</Link>
@@ -108,27 +114,26 @@ function Restaurant({setItems}) {
             <div className={classes.borderBottom}></div>
             <Grid item xs={false} sm={1} />
           </Grid> */}
-          <Grid container>
+          <Grid container style={{marginBottom: '20px'}}>
             <Grid item xs={7}>
             <Card className={classes.root}>
                   <CardMedia
                     className={classes.media}
-                    image="http://res.cloudinary.com/dtww61ulg/image/upload/v1605852593/dnsao9uysv5tmkvxb9ul.jpg"
+                    image=  {businessDeails.image}
                     title="Contemplative Reptile"
                   />
               </Card>
             </Grid>
             <Grid item xs={5}>
-              <Typography className={classes.rightheading}>AJ's</Typography>
+              <Typography className={classes.rightheading}>{businessDeails.name}</Typography>
               <Typography className={classes.rightdesc}>Ordered some meals from AJs and i must say they were really lip smacking. I tried a few rolls, burgers, pizzas and lasagna and were really tasty. They have introduced two new menus for the visitors and website to order from the comfort of your home. Do order. Recommended.</Typography>
-              <Typography className={classes.rightdesc}>Price: ₹400</Typography>
             </Grid>
             </Grid>
             <Typography style={{fontSize: 30, marginTop: 60,marginLeft: 150,}}>Add Items into Cart</Typography>  
             <Grid container>
               {
-                Items.map((value, id)=>(
-                  <Grid item xs={4} key={id} onClick={()=>addItem(value)}>
+                DisplayItems.map((value, id)=>(
+                  <Grid item xs={4} key={id} onClick={()=>addItem(value,id)}>
                    <Item details={value}/>
                   </Grid>
                 ))
