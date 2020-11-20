@@ -2,8 +2,10 @@ import React,{useState} from 'react';
 import RegistrationTemplate from '../../components/RegistrationTemplate/RegistrationTemplate';
 import GetUserLocation from '../../components/SelectLocationOnMap/GetUserLocation'
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const DriverRegistration = () => {
+    const history = useHistory();
     const [name,setName]= useState('');
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');

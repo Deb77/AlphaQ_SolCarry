@@ -11,7 +11,7 @@ import TypeSelect from './TypeSelect';
 import ImageUpload from './ImageUpload';
 import Axios from 'axios';
 import Navbar from '../navbar';
-
+import { useHistory } from 'react-router-dom';
 
 const useStyles= makeStyles({
     container:{
@@ -102,6 +102,7 @@ const useStyles= makeStyles({
 });
 
 const AssociateRegistration = ({mapStatus}) => {
+    const history = useHistory();
     const [location, setLocation]= useState({
         lat: 15.292158,
         lng: 73.969542
