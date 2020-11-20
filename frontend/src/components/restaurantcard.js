@@ -10,10 +10,10 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
     rootc: {
-        Width: 400,
+        
         textDecoration: 'none',
         marginBottom: 50,
-        height:380,
+        height:340,
       },
       mediac: {
         height: 250,
