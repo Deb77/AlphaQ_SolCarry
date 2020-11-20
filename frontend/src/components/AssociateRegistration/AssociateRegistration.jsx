@@ -110,6 +110,7 @@ const AssociateRegistration = ({mapStatus}) => {
     const [name,setName]= useState('');
     const [type,setType]= useState('');
     const [email,setEmail]= useState('');
+    const [description,setDescription]= useState('');
     const [password,setPassword]= useState('');
     const [imgageUrl,setImgageUrl]= useState('');
 
@@ -125,7 +126,7 @@ const AssociateRegistration = ({mapStatus}) => {
                 var r = new RegExp(' Goa ');
                 if(r.test(result[0].formatted_address)){
                     Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
-                        name,email,password,type,
+                        name,email,password,type,description,
                         lat: location.lat.toString(),
                         long: location.lng.toString(),
                         image: imgageUrl
@@ -158,6 +159,8 @@ const AssociateRegistration = ({mapStatus}) => {
                         <Name name={name} setName={setName} />
                         <p>Email</p>
                         <Email email={email} setEmail={setEmail} />
+                        <p>Description</p>
+                        <Email email={description} setEmail={setDescription} />
                         <p>Password</p>
                         <Password password={password} setPassword={setPassword} />
                         <p>Confirm Password</p>
@@ -176,7 +179,7 @@ const AssociateRegistration = ({mapStatus}) => {
                 <div className={styles.rightContainer}>
                 {
                 mapStatus?
-                <Map location={location} setLocation={setLocation} height='600px' />:
+                <Map location={location} setLocation={setLocation} height='700px' />:
                 <h1>Loading</h1>
                 }
                 </div>
