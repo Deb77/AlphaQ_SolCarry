@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles= makeStyles({
     heading: {
         textAlign: 'center',
+    },
+    form: {
+        margin:10,
     }
 });
 
@@ -19,7 +22,10 @@ const RestaurantPortal = () => {
                 <h2 className={styles.heading}>Restaurant Portal</h2>
                 <OrdersTable />
                 <div className={styles.heading}>
-                <AddMenuItem />
+                    <div className={styles.form}>
+                        <p>Add an new item</p>
+                        <AddMenuItem />
+                    </div>
                 </div>
         </div>
         <MenuDisplay />

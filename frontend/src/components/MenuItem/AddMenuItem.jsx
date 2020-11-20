@@ -19,9 +19,16 @@ const Button = styled('button')({
   boxShadow: '0px 4px 15px 0px rgba(0,0,0,0.25)'
 });
 
+
+const Div = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems:'center'
+})
+
 const AddMenuItem = ({handleSubmit}) => {
     return (
-        <>
+        <Div>
         <TextField
           id="standard-number"
           label="Dish Name"
@@ -33,10 +40,10 @@ const AddMenuItem = ({handleSubmit}) => {
           type="number"
         />
         <ImageUploader />
-        <Button onClick={handleSubmit}
-          >   Submit
+        <Button onClick={handleSubmit}>
+          Submit
         </Button>
-        </>
+        </Div>
     );
 }
 
