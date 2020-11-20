@@ -71,16 +71,18 @@ const useStyles= makeStyles({
         boxShadow: '0px 4px 15px 0px rgba(0,0,0,0.25)'
     },
     infoContainer:{
-        display: 'grid',
+        display: 'flex',
         width: '100%',
         maxWidth: '1100px',
         margin: 'auto',
+        marginLeft: '104px',
+        marginRight: '30px',
         alignItems: 'center',
         alignContent: 'center',
-        gridTemplateColumns: 'auto 450px',
+        justifyContent: 'space-between',
         gridColumnGap: '5%',
         '& p':{
-            fontSize: '36px'
+            fontSize: '36px',
         },
         '& span':{
             fontFamily: 'weasthood',
