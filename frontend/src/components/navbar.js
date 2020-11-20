@@ -92,7 +92,7 @@ function Navbar() {
 
    const handleLogout = () => {
     AuthService.logout();
-    history.push("/");
+    history.go(0)
    };
 //    const {
 //     account: { role },

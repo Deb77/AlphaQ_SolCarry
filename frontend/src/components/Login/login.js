@@ -111,10 +111,9 @@ const Login = ({}) => {
             name,email,password
         })
         .then((response)=>{
-            console.log(response.data)
-            localStorage.setItem("user", JSON.stringify(response.data));
-            history.push("/");
-            history.go(0)
+             console.log(response.data.token)
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+             history.go(0)
         })
         .catch((error)=>{
             alert(error)
@@ -124,10 +123,10 @@ const Login = ({}) => {
             name,email,password
         })
         .then((response)=>{
-            console.log(response.data.token, response.data.user)
+            console.log(response.data.token)
             localStorage.setItem("user", JSON.stringify(response.data));
-            history.push("/restaurant-portal");
-            history.go(0)
+             history.push("/restaurant-portal");
+             history.go(0)
         })
         .catch((error)=>{
             alert(error)

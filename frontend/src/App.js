@@ -4,13 +4,22 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './pages/Home/home';
-import restaurant from './components/restaurantcontent';
+import restaurant from './components/restaurantinfo';
 import Login from "./components/Login/login";
 
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
 import AssociateRegistration from './components/AssociateRegistration/AssociateRegistration';
-
+export const UserRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+          <Component {...props} />
+      }
+    />
+  );
+};
 const App = () => {
   const [mapStatus, setMapStatus]= useState(false);
   return (
@@ -31,7 +40,8 @@ const App = () => {
           </Route>
           <Route path='/login' exact component={Login}>
           </Route>
-          <Route exact path="/restaurant/:restName" component={restaurant} />
+          <UserRoute exact path="/restaurant/:restName" component={restaurant} />
+          
         </Switch>
         {/* <footer>
           Footer Here
