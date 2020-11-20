@@ -12,6 +12,10 @@ const businessSchema = Schema({
         type: String,
         required: [true, 'Please enter your name'],
     },
+    description: {
+        type: String,
+        required: [true, "Please enter item's description"],
+    },
     email: {
         type: String,
         required: [true, 'Please enter your email'],
