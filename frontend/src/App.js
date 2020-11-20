@@ -5,6 +5,7 @@ import store from './store';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './pages/Home/home';
 import restaurant from './components/restaurantcontent';
+import Login from "./components/Login/login";
 
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
@@ -27,6 +28,8 @@ const App = () => {
             <AssociateRegistration mapStatus={mapStatus}/>
           </Route>
           <Route path='/' exact component={Home}>
+          </Route>
+          <Route path='/login' exact component={Login}>
           </Route>
           <Route exact path="/restaurant/:restName" component={restaurant} />
         </Switch>
