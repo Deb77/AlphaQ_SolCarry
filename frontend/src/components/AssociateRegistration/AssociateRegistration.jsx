@@ -11,6 +11,7 @@ import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
 import ImageUpload from './ImageUpload';
 import Axios from 'axios';
+import Navbar from '../navbar';
 
 
 const useStyles= makeStyles({
@@ -147,6 +148,7 @@ const AssociateRegistration = ({mapStatus}) => {
     const styles= useStyles();
     return (
         <>
+        <Navbar />
             <h1 className={styles.heading}>Welcome Future <br/> Business Associate</h1>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>

@@ -67,6 +67,7 @@ const DriverPortal = ({ mapStatus }) => {
                 alert('Something went wrong')
             else{
                 var r = new RegExp(' Goa ');
+                console.log(result)
                 if(r.test(result[0].formatted_address)){
                     setUpdatedTime(new Date());
                     //api call

@@ -1,5 +1,5 @@
 //react
-import React, { Fragment,  useState  } from 'react';
+import React, { Fragment,  useState , useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
@@ -24,6 +24,7 @@ import store from "../../redux/store";
 
 import Navbar from '../../components/navbar';
 import RestaurantContent from "../../components/restaurantcontent";
+import GetUserLocation from '../../components/SelectLocationOnMap/GetUserLocation';
 const categories = [
     {
         value: 'Restaurant',
@@ -77,13 +78,28 @@ const useStyles = makeStyles((theme) => ({
           paddingLeft: 180
       }
  }));
-const Home =() => {
+const Home =({mapStatus}) => {
     
     const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
     const [category, setCategory] = React.useState('Restaurant');
     const [search, setSearch] = React.useState('');
+    const [locationPlaceholder, setLocationPlaceholder] = React.useState('Goa');
+    const [currentLocation, setCurrentLocation] = React.useState({
+      lat: 15.292158,
+      lng: 73.969542
+    });
+    useEffect(()=>{
+      if(mapStatus){ //map not initialised yet
+        let geocoder= new window.google.maps.Geocoder();
+        geocoder.geocode({location:currentLocation},(result, status)=>{//gets address from lat lng
+            if(status ==='OK'){
+              setLocationPlaceholder(result[0].formatted_address[0].long_name)
+            }
+        })
+      }
+    },[currentLocation,mapStatus])
     const handleChangeCategory = (event) => {
         setCategory(event.target.value);
       };
@@ -118,6 +134,7 @@ const Home =() => {
     return(
         
         <Fragment>
+            <GetUserLocation setCurrentLocation={setCurrentLocation} />
             <Navbar />
             <Box
             display="flex"
@@ -146,7 +163,7 @@ const Home =() => {
                     className={classes.input}
                     value={search}
                     onChange={handleChangeSearch}
-                    placeholder={'Search for ' + category + ' in Marcel, Goa.' }
+                    placeholder={'Search for ' + category + ' in '+ locationPlaceholder +'.' }
                     inputProps={{ 'aria-label': 'search for stuff' }}
                 />
                 {/* <Autocomplete id="combo-box-demo" options={restaurantArray} getOptionLabel={(option) => option.name} style={{ width: "100%" }} renderInput={(params) => <TextField {...params} placeholder={'Search for ' + category + ' in Marcel, Goa.'} value={search} onChange={handleChangeSearch} variant="outlined" />}/>
