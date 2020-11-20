@@ -15,7 +15,7 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3008;
 const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {
@@ -29,7 +29,7 @@ app.use('/customer', customerRoutes);
 app.use('/business', businessRoutes);
 app.use('/driver', driverRoutes);
 app.use('/item', itemRoutes);
-app.use('/order',orderRoutes)
+app.use('/order', orderRoutes);
 
 app.listen(port, () =>
     console.log(colors.bold.cyan(`Server running on port ${port}`))
