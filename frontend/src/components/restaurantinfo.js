@@ -1,24 +1,15 @@
+//react
 import React from "react";
-//redux
-import { useSelector } from "react-redux";
 
 //material-ui
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import CardMedia from "@material-ui/core/CardMedia";
 
 
-
-
-// import Spinner from "../util/spinner/spinner";
-// import SwipeableImages from "./SwipeableImages";
-// import IMG from '../images/burger.png';
+//custom
 import Navbar from './navbar';
 import Item from './ItemCard';
 
@@ -49,9 +40,7 @@ function Restaurant(props) {
   // const getRest = {
 
   // }
-  const restaurantArray = [
-    {"name": "AJ's"}, {"desc": "Hello"},{"imageUrl":"https://i.ibb.co/pKbdPmQ/Screenshot-5.png"}, {"_id": "01"}, 
-  ]
+  
   return (
     <>
           <Navbar />

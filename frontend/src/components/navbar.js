@@ -1,5 +1,5 @@
 //react
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
@@ -14,16 +14,13 @@ import Button from '@material-ui/core/Button';
 
 import IconButton from '@material-ui/core/IconButton';
 import CartIcon from '@material-ui/icons/ShoppingCart';
-import ReceiptIcon from '@material-ui/icons/Receipt';
 import Modal from '@material-ui/core/Modal';
-
-//redux
-import { useDispatch, useSelector } from "react-redux";
 
 //custom
 import './navbar.css';
 import Login from "./Login/login";
 import AuthService from "../Auth/auth.service";
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,14 +60,14 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'weasthood',
     fontSize: 40 ,
     fontWeight: 600,
-    marginRight: 1000,
     marginLeft: 20,
     marginTop: 10,
+    paddingRight: 1000,
     color: '#E17E51' ,
 },
 iconButton: {
     marginLeft: 15,
-    marginRight: 15,
+    marginRight: 25,
     color: '#E17E51' ,
     marginTop: 5,
   },
@@ -94,14 +91,7 @@ function Navbar() {
     AuthService.logout();
     history.go(0)
    };
-//    const {
-//     account: { role },
-//     authenticated,
-//     firstName,
-//     lastName,
-//     address,
-//   } = useSelector((state) => state.auth);
-   const role = "ROLE_SELLE" ;
+
    const body = (
     <div  className={classes.paper}>
       <Login  />
@@ -115,10 +105,9 @@ function Navbar() {
   const handleClose = () => {
     setOpen(false);
   };
-  
+   
   const user = AuthService.getCurrentUser();
   
-    
     return (
         <>
         <nav className="navbar">
@@ -129,34 +118,14 @@ function Navbar() {
                 </Link>
                 
                 { user? (
-           role === "ROLE_SELLER" ? (
-             <div className={classes.buttons}>
-               <Typography className={classes.buttonStyles}>
-                 Seller Dashboard
-               </Typography>
-               <Link to="/seller/orders">
-                 <Button className={classes.buttonStyles}>Orders</Button>
-               </Link>
-               <Button
-                  onClick={handleLogout}
-                 className={classes.buttonStyles}
-                 variant="outlined"
-               >
-                 Logout
-               </Button>
-             </div>
-            ) : (
             <div className={classes.buttons}>
               <Box display='flex' >
               <Typography className={classes.buttonStylesWelc}>
                 Hey, 
               </Typography>
               <Typography className={classes.buttonStylesUser}>
-                Deepraj  
+                {jwt_decode(user).user.name}!
               </Typography>
-              <Link to="/orders">
-              <IconButton size="large" type="submit" className={classes.iconButton} aria-label="order"><ReceiptIcon /></IconButton>
-              </Link>
               <Link to="/cart">
                 <IconButton  type="submit" className={classes.iconButton} aria-label="search"><CartIcon size="large" /></IconButton>
               </Link>
@@ -164,7 +133,6 @@ function Navbar() {
               <Button size="large" onClick={handleLogout} variant="contained" className={classes.button}>LOGOUT</Button>
               </Box>
             </div>
-          )
         ) : (
           <div className={classes.buttons}>
             

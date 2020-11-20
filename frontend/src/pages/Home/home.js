@@ -13,17 +13,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
-//redux
-
- import { useDispatch, useSelector } from "react-redux";
 
 //Custom Components
-
 import Navbar from '../../components/navbar';
 import RestaurantContent from "../../components/restaurantcontent";
 import GetUserLocation from '../../components/SelectLocationOnMap/GetUserLocation';
+
 const categories = [
     {
         value: 'Restaurant',
@@ -78,8 +73,6 @@ const useStyles = makeStyles((theme) => ({
       }
  }));
 const Home =({mapStatus}) => {
-    
-    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
     const [category, setCategory] = React.useState('Restaurant');

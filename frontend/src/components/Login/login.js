@@ -1,17 +1,15 @@
+//react
 import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-import Map from '../SelectLocationOnMap/Map';
+//custom
 import Password from '../FormComponents/Password';
-import ConfirmPassword from '../FormComponents/ConfirmPassword';
 import Email from '../FormComponents/Email';
 import Name from '../FormComponents/Name';
-import { Button } from '@material-ui/core';
-import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
-
 import Axios from 'axios';
+
 
 
 const useStyles= makeStyles({
@@ -113,7 +111,7 @@ const Login = ({}) => {
         })
         .then((response)=>{
              console.log(response.data.token)
-            localStorage.setItem("user", JSON.stringify(response.data.user));
+            localStorage.setItem("user", JSON.stringify(response.data.token));
              history.go(0)
         })
         .catch((error)=>{
@@ -144,7 +142,7 @@ const Login = ({}) => {
             history.go(0)
         })
         .catch((error)=>{
-            alert("Something went wrong")
+            alert(error)
         })}
         
     };

@@ -1,16 +1,16 @@
 //react
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import { useSelector } from "react-redux";
 
 //M-UI
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 
+
 //custom
 import RestaurantCard from "./restaurantcard";
+import axios from 'axios';
+
 const useStyles = makeStyles({
     rootc: {
         width: 600,
