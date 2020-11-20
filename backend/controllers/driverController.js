@@ -55,8 +55,8 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.stats_update = async (req, res) => {
     try {
-        await Driver.findByIdAndUpdate(req.params.id, req.body);
-        res.status(201).json("The driver's information has been updated successfully");
+        const driver = await Driver.findByIdAndUpdate(req.params.id, req.body);
+        res.status(201).json({driver: driver});
     }
     catch (err) {
         res.status(400).json("We were unable to update");
