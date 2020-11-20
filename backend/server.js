@@ -8,6 +8,7 @@ const businessRoutes = require('./routes/businessRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const emailRoutes = require('./routes/emailRoutes');
 
 const app = express();
 require('dotenv').config();   
@@ -30,6 +31,7 @@ app.use('/business', businessRoutes);
 app.use('/driver', driverRoutes);
 app.use('/item', itemRoutes);
 app.use('/order', orderRoutes);
+app.use('/email', emailRoutes);
 
 app.listen(port, () =>
     console.log(colors.bold.cyan(`Server running on port ${port}`))
