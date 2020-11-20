@@ -11,16 +11,19 @@ import Logo from '../images/download (1).png';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography, Box } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { logoutAction } from "../redux/actions/authActions";
+
 import IconButton from '@material-ui/core/IconButton';
 import CartIcon from '@material-ui/icons/ShoppingCart';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import Modal from '@material-ui/core/Modal';
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
 
 //custom
 import './navbar.css';
+import Login from "./Login/login";
+import AuthService from "../Auth/auth.service";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,19 +74,25 @@ iconButton: {
     color: '#E17E51' ,
     marginTop: 5,
   },
-
+  paper: {
+    position: 'absolute',
+    width: 400,
+    marginLeft: 690,
+    marginTop: 200,
+  },
     
 
   }));
+  
 function Navbar() {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const history = useHistory();
-    const yeet = true;
+    const [open, setOpen] = React.useState(false);
   
 
    const handleLogout = () => {
-     dispatch(logoutAction(history));
+    AuthService.logout();
+    history.push("/");
    };
 //    const {
 //     account: { role },
@@ -93,7 +102,22 @@ function Navbar() {
 //     address,
 //   } = useSelector((state) => state.auth);
    const role = "ROLE_SELLE" ;
+   const body = (
+    <div  className={classes.paper}>
+      <Login  />
+      
+    </div>
+  );
+   const handleOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  const user = AuthService.getCurrentUser();
+  
     
     return (
         <>
@@ -104,7 +128,7 @@ function Navbar() {
                 <Typography className={classes.heading}>SOLCARRY</Typography>
                 </Link>
                 
-                { yeet? (
+                { user? (
            role === "ROLE_SELLER" ? (
              <div className={classes.buttons}>
                <Typography className={classes.buttonStyles}>
@@ -143,13 +167,18 @@ function Navbar() {
           )
         ) : (
           <div className={classes.buttons}>
-            <Link to="/login" className={classes.link} >
-                <Button size="large" variant="contained" className={classes.button}>LOGIN</Button>
-                </Link>
+            
+                <Button onClick={handleOpen} size="large" variant="contained" className={classes.button}>LOGIN</Button>
           </div>
         )}
             </div>
         </nav>
+        <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        {body}
+      </Modal>
         </>
     )
 }

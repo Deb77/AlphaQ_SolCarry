@@ -12,7 +12,8 @@ module.exports.order_get = async(req, res) => {
     }
 }
 
-module.exports.order_post = async(req, res) => {
+module.exports.order_post = async (req, res) => {
+    console.log(req.body);
     try {
         const drivers = await Driver.find({ available: true });
         let lat = "";
@@ -30,10 +31,10 @@ module.exports.order_post = async(req, res) => {
                 closestDriver = driver._id;
             }
             if (i === drivers.length - 1) {
-                const order = await Order.create({
+                await Order.create({
                     customerId: req.body.customerId,
                     businessId: req.body.businessId,
-                    driverId: closestDriver
+                    driverId: closestDriver,
                 })
             }
         })

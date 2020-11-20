@@ -16,8 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 //redux
-import store from "../../redux/store";
- import { fetchRestaurantsByAddress } from "../../redux/actions/dataActions";
+
  import { useDispatch, useSelector } from "react-redux";
 
 //Custom Components
@@ -122,10 +121,10 @@ const Home =({mapStatus}) => {
       );
       let latlng = localStorage.getItem("latlng");
 
-       if (latlng) {
-         const latlngArray = latlng.split(", ");
-         dispatch(fetchRestaurantsByAddress(latlngArray[0], latlngArray[1]));
-       }
+      //  if (latlng) {
+      //    const latlngArray = latlng.split(", ");
+      //    dispatch(fetchRestaurantsByAddress(latlngArray[0], latlngArray[1]));
+      //  }
       
       const handleSubmit = (event) => {
         let restUrl = search.split(" ");

@@ -1,30 +1,31 @@
 import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 import Map from '../SelectLocationOnMap/Map';
 import Password from '../FormComponents/Password';
 import ConfirmPassword from '../FormComponents/ConfirmPassword';
 import Email from '../FormComponents/Email';
 import Name from '../FormComponents/Name';
+import { Button } from '@material-ui/core';
 import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
-import ImageUpload from './ImageUpload';
+
 import Axios from 'axios';
-import Navbar from '../navbar';
 
 
 const useStyles= makeStyles({
     container:{
         display: 'grid',
-        gridTemplateColumns: '40% 60%',
         marginBottom: '10px',
-        backgroundColor: '#E17E51'
+        backgroundColor: '#E17E51',
+        width: '500px',
     },
     leftContainer:{
         display: 'grid',
         gridTemplateColumns: '100%',
         gridRowGap:'10px',
-        height: '300px',
+        height: '500px',
         paddingTop: '20px',
     },
     details:{
@@ -36,7 +37,7 @@ const useStyles= makeStyles({
         '& .MuiFormControl-root':{
             boxSizing: 'border-box',
             backgroundColor: '#fff',
-            borderRadius: '40px',
+            borderRadius: '2px',
             padding: '0px'
         },
         '& .MuiOutlinedInput-notchedOutline':{
@@ -48,7 +49,10 @@ const useStyles= makeStyles({
         '& p':{
             margin: '0',
             fontWeight: '500',
-            paddingLeft: '20px'
+            paddingLeft: '1px'
+        },
+        input2:{
+            width: '100%',
         }
     },
     heading:{
@@ -62,11 +66,12 @@ const useStyles= makeStyles({
         fontFamily: 'weasthood',
         fontSize: '22px',
         letterSpacing: '2px',
-        borderRadius: '30px',
-        margin: '40px 0',
+        borderRadius: '5px',
+        margin: '20px 0',
         border: '0',
         outline: '0',
         backgroundColor: '#3F50B5',
+        marginLeft: 45,
         color: '#fff',
         boxShadow: '0px 4px 15px 0px rgba(0,0,0,0.25)'
     },
@@ -90,65 +95,63 @@ const useStyles= makeStyles({
             color: '#E17E51',
         }
     },
-    svg:{
-        width: '450px',
-        height: '450px'
-    },
-    input2:{
-        display: 'grid',
-        gridTemplateColumns: '70% 30%',
-        gridColumnGap: '5%',
-    }
+    
 });
 
-const AssociateRegistration = ({mapStatus}) => {
-    const [location, setLocation]= useState({
-        lat: 15.292158,
-        lng: 73.969542
-    });
+const Login = ({}) => {
+    const history = useHistory();
     const [name,setName]= useState('');
-    const [type,setType]= useState('');
+    const [type,setType]= useState('User');
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');
-    const [imgageUrl,setImgageUrl]= useState('');
-    const [error,setError]= useState(false);
-
+    
     const handleSubmit=()=>{
-        if(!mapStatus){ //map not initialised yet
-            return null
-        }
-        let geocoder= new window.google.maps.Geocoder();
-        geocoder.geocode({location},(result, status)=>{
-            if(status !=='OK')
-                alert('Something went wrong')
-            else{
-                var r = new RegExp(' Goa ');
-                if(r.test(result[0].formatted_address)){
-                    Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
-                        name,email,password,type,
-                        lat: location.lat.toString(),
-                        long: location.lng.toString(),
-                        image: imgageUrl
-                    })
-                    .then((response)=>{
-                        console.log(response.data.token, response.data.user)
-                    })
-                    .catch((error)=>{
-                        alert("Something went wrong")
-                    })            
-                }
-                else{
-                    alert('Please select a location within Goa')
-                }
-            }
+        if (type === "User"){
+        Axios.post('https://solcarry-backend.herokuapp.com/customer/login',{
+            name,email,password
         })
+        .then((response)=>{
+            console.log(response.data)
+            localStorage.setItem("user", JSON.stringify(response.data));
+            history.push("/");
+            history.go(0)
+        })
+        .catch((error)=>{
+            alert(error)
+        })}
+        else if (type === "Associate"){
+            Axios.post('https://solcarry-backend.herokuapp.com/business/login',{
+            name,email,password
+        })
+        .then((response)=>{
+            console.log(response.data.token, response.data.user)
+            localStorage.setItem("user", JSON.stringify(response.data));
+            history.push("/restaurant-portal");
+            history.go(0)
+        })
+        .catch((error)=>{
+            alert(error)
+        })
+        }
+        else if (type === "Delivery"){
+            Axios.post('https://solcarry-backend.herokuapp.com/driver/login',{
+            name,email,password
+        })
+        .then((response)=>{
+            console.log(response.data.token, response.data.user)
+            localStorage.setItem("user", JSON.stringify(response.data));
+            history.push("/driverPortal");
+            history.go(0)
+        })
+        .catch((error)=>{
+            alert("Something went wrong")
+        })}
+        
     };
 
     const styles= useStyles();
     return (
         <>
-        <Navbar />
-            <h1 className={styles.heading}>Welcome Future <br/> Business Associate</h1>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>
                     <div className={styles.details}>
@@ -158,12 +161,9 @@ const AssociateRegistration = ({mapStatus}) => {
                         <Email email={email} setEmail={setEmail} />
                         <p>Password</p>
                         <Password password={password} setPassword={setPassword} />
-                        <p>Confirm Password</p>
-                        <ConfirmPassword Cpassword={password} />
-                        <p>Business Type</p>
+                        <p>Designation</p>
                         <div className={styles.input2}>
                             <TypeSelect type={type} setType={setType} />
-                            <ImageUpload setImgageUrl={setImgageUrl} />
                         </div>
                         <button onClick={handleSubmit}
                         className={styles.submitButton} //variant="contained" color="primary">
@@ -171,23 +171,9 @@ const AssociateRegistration = ({mapStatus}) => {
                         </button>
                     </div>
                 </div>
-                <div className={styles.rightContainer}>
-                {
-                mapStatus?
-                <Map location={location} setLocation={setLocation} height='600px' />:
-                <h1>Loading</h1>
-                }
-                </div>
-            </div>
-            <div className={styles.infoContainer}>
-                <p>
-                    Register with <span>SOLCARRY</span> and take your business to the next level.<br/>
-                    Online Delivery Platform tailored for the goan market.
-                </p>
-                <MockMobile className={styles.svg}/>
             </div>
         </>
     );
 }
 
-export default AssociateRegistration;
+export default Login;
