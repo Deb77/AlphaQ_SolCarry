@@ -5,7 +5,12 @@ import MenuDisplay from '../../components/MenuItem/MenuDisplay';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles= makeStyles({
-
+    heading: {
+        textAlign: 'center',
+    },
+    form: {
+        margin:10,
+    }
 });
 
 const RestaurantPortal = () => {
@@ -13,9 +18,15 @@ const RestaurantPortal = () => {
     const styles= useStyles()
     return (
         <>
-        <div>
-            <OrdersTable />
-            <AddMenuItem />
+            <div>
+                <h2 className={styles.heading}>Restaurant Portal</h2>
+                <OrdersTable />
+                <div className={styles.heading}>
+                    <div className={styles.form}>
+                        <p>Add an new item</p>
+                        <AddMenuItem />
+                    </div>
+                </div>
         </div>
         <MenuDisplay />
         </>
