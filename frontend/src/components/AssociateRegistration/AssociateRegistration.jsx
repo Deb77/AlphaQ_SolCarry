@@ -111,7 +111,6 @@ const AssociateRegistration = ({mapStatus}) => {
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');
     const [imgageUrl,setImgageUrl]= useState('');
-    const [error,setError]= useState(false);
 
     const handleSubmit=()=>{
         if(!mapStatus){ //map not initialised yet
@@ -131,7 +130,9 @@ const AssociateRegistration = ({mapStatus}) => {
                         image: imgageUrl
                     })
                     .then((response)=>{
-                        console.log(response.data.token, response.data.user)
+                        localStorage.setItem("type", "Associate");
+                        localStorage.setItem("user", JSON.stringify(response.data));
+                        history.push("/restautantPortal");
                     })
                     .catch((error)=>{
                         alert("Something went wrong")

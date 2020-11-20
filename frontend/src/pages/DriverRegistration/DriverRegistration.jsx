@@ -26,7 +26,9 @@ const DriverRegistration = () => {
                 long: location.lng.toString(),
             })
             .then((response)=>{
-                alert('Success')
+                localStorage.setItem("type", "Delivery");
+                localStorage.setItem("user", JSON.stringify(response.data));
+                history.push("/driverPortal");
             })
             .catch(()=>{
                 alert('Somethign went wrong')

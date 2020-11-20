@@ -19,7 +19,9 @@ const UserRegistration = () => {
                 name,email,password
             })
             .then((response)=>{
-                alert('Success')
+                localStorage.setItem("type", "User");
+                localStorage.setItem("user", JSON.stringify(response.data));
+                history.push("/");
             })
             .catch(()=>{
                 alert('Somethign went wrong')
