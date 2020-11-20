@@ -14,6 +14,7 @@ import RestaurantPortal from './pages/RestaurantPortal/RestaurantPortal';
 import AssociateRegistration from './components/AssociateRegistration/AssociateRegistration';
 import UserRegistration from './pages/UserRegistration/UserRegistration';
 import DriverRegistration from './pages/DriverRegistration/DriverRegistration';
+import Confirmation from './pages/Confirmation';
 
 
 const App = () => {
@@ -66,8 +67,9 @@ const App = () => {
           </Route>
           <Route exact path="/restaurant/:restName" component={restaurant} />
           <Route exact path="/cart">
-            <Cart items={items} setItems={setItems} />
+            <Cart items={items} setItems={setItems} mapStatus={mapStatus} />
           </Route>
+          <Route exact path="/hooray" component={Confirmation} />
         </Switch>
         {/* <footer>
           Footer Here
