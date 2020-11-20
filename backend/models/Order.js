@@ -14,9 +14,9 @@ const orderSchema = Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
-    orderDetails: {
-        type: [String],
-    }
+    orderDetails: [{
+        type: String
+    }]
 },
     { timestamps: true }
 );
