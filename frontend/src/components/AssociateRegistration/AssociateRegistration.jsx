@@ -6,12 +6,12 @@ import Password from '../FormComponents/Password';
 import ConfirmPassword from '../FormComponents/ConfirmPassword';
 import Email from '../FormComponents/Email';
 import Name from '../FormComponents/Name';
-import { Button } from '@material-ui/core';
 import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
 import ImageUpload from './ImageUpload';
 import Axios from 'axios';
-
+import Navbar from '../navbar';
+import { useHistory } from 'react-router-dom';
 
 const useStyles= makeStyles({
     container:{
@@ -102,6 +102,7 @@ const useStyles= makeStyles({
 });
 
 const AssociateRegistration = ({mapStatus}) => {
+    const history = useHistory();
     const [location, setLocation]= useState({
         lat: 15.292158,
         lng: 73.969542
@@ -111,26 +112,44 @@ const AssociateRegistration = ({mapStatus}) => {
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');
     const [imgageUrl,setImgageUrl]= useState('');
-    const [error,setError]= useState(false);
 
     const handleSubmit=()=>{
-        Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
-            name,email,password,type,
-            lat: location.lat.toString(),
-            long: location.lng.toString(),
-            image: imgageUrl
-        })
-        .then((response)=>{
-            console.log(response.data.token, response.data.user)
-        })
-        .catch((error)=>{
-            alert("Something went wrong")
+        if(!mapStatus){ //map not initialised yet
+            return null
+        }
+        let geocoder= new window.google.maps.Geocoder();
+        geocoder.geocode({location},(result, status)=>{
+            if(status !=='OK')
+                alert('Something went wrong')
+            else{
+                var r = new RegExp(' Goa ');
+                if(r.test(result[0].formatted_address)){
+                    Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
+                        name,email,password,type,
+                        lat: location.lat.toString(),
+                        long: location.lng.toString(),
+                        image: imgageUrl
+                    })
+                    .then((response)=>{
+                        localStorage.setItem("type", "Associate");
+                        localStorage.setItem("user", JSON.stringify(response.data));
+                        history.push("/restautantPortal");
+                    })
+                    .catch((error)=>{
+                        alert("Something went wrong")
+                    })            
+                }
+                else{
+                    alert('Please select a location within Goa')
+                }
+            }
         })
     };
 
     const styles= useStyles();
     return (
         <>
+        <Navbar />
             <h1 className={styles.heading}>Welcome Future <br/> Business Associate</h1>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>

@@ -106,6 +106,7 @@ const Login = ({}) => {
     const [password,setPassword]= useState('');
     
     const handleSubmit=()=>{
+        localStorage.setItem("type", type);
         if (type === "User"){
         Axios.post('https://solcarry-backend.herokuapp.com/customer/login',{
             name,email,password
@@ -125,8 +126,8 @@ const Login = ({}) => {
         .then((response)=>{
             console.log(response.data.token)
             localStorage.setItem("user", JSON.stringify(response.data));
-             history.push("/restaurant-portal");
-             history.go(0)
+            history.push("/restaurantPortal");
+            history.go(0)
         })
         .catch((error)=>{
             alert(error)
