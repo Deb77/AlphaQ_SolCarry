@@ -9,6 +9,8 @@ import restaurant from './components/restaurantcontent';
 import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 import DriverPortal from './components/DriverPortal/DriverPortal';
 import AssociateRegistration from './components/AssociateRegistration/AssociateRegistration';
+import UserRegistration from './pages/UserRegistration/UserRegistration';
+import DriverRegistration from './pages/DriverRegistration/DriverRegistration';
 
 const App = () => {
   const [mapStatus, setMapStatus]= useState(false);
@@ -25,6 +27,12 @@ const App = () => {
           </Route>
           <Route path='/associateRegistration'>
             <AssociateRegistration mapStatus={mapStatus}/>
+          </Route>
+          <Route path='/userRegistration'>
+            <UserRegistration />
+          </Route>
+          <Route path='/driverRegistration'>
+            <DriverRegistration />
           </Route>
           <Route path='/' exact component={Home}>
           </Route>
