@@ -114,17 +114,33 @@ const AssociateRegistration = ({mapStatus}) => {
     const [error,setError]= useState(false);
 
     const handleSubmit=()=>{
-        Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
-            name,email,password,type,
-            lat: location.lat.toString(),
-            long: location.lng.toString(),
-            image: imgageUrl
-        })
-        .then((response)=>{
-            console.log(response.data.token, response.data.user)
-        })
-        .catch((error)=>{
-            alert("Something went wrong")
+        if(!mapStatus){ //map not initialised yet
+            return null
+        }
+        let geocoder= new window.google.maps.Geocoder();
+        geocoder.geocode({location},(result, status)=>{
+            if(status !=='OK')
+                alert('Something went wrong')
+            else{
+                var r = new RegExp(' Goa ');
+                if(r.test(result[0].formatted_address)){
+                    Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
+                        name,email,password,type,
+                        lat: location.lat.toString(),
+                        long: location.lng.toString(),
+                        image: imgageUrl
+                    })
+                    .then((response)=>{
+                        console.log(response.data.token, response.data.user)
+                    })
+                    .catch((error)=>{
+                        alert("Something went wrong")
+                    })            
+                }
+                else{
+                    alert('Please select a location within Goa')
+                }
+            }
         })
     };
 
