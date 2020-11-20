@@ -126,7 +126,9 @@ function Restaurant({setItems,businessDeails}) {
             </Grid>
             <Grid item xs={5}>
               <Typography className={classes.rightheading}>{businessDeails.name}</Typography>
-              <Typography className={classes.rightdesc}>Ordered some meals from AJs and i must say they were really lip smacking. I tried a few rolls, burgers, pizzas and lasagna and were really tasty. They have introduced two new menus for the visitors and website to order from the comfort of your home. Do order. Recommended.</Typography>
+              <Typography className={classes.rightdesc}>
+                {businessDeails.description}
+              </Typography>
             </Grid>
             </Grid>
             <Typography style={{fontSize: 30, marginTop: 60,marginLeft: 150,}}>Add Items into Cart</Typography>  

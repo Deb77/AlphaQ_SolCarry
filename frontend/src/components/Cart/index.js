@@ -177,10 +177,10 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
                 alert('Something went wrong')
             else{
                 var r = new RegExp(' Goa ');
-                //console.log(result)
                 if(r.test(result[0].formatted_address)){
+                    //axios.post('https://solcarry-backend.herokuapp.com/business/signup')
                     setItems([]);
-                    history.push("/restautantPortal");
+                    history.push("/hooray");
                 }
                 else{
                     alert('Please select a location within Goa')
