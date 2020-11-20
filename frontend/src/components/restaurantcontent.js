@@ -13,7 +13,7 @@ import Box from "@material-ui/core/Box";
 import RestaurantCard from "./restaurantcard";
 const useStyles = makeStyles({
     rootc: {
-        maxWidth: 400,
+        width: 600,
         
       },
       mediac: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
       },
       cards:{
         paddingTop: 80,
-        paddingLeft: 160,
+        
         paddingBottom: 180,
     }
   });
@@ -48,7 +48,7 @@ const classes = useStyles();
   return (
     <>
       <Box display="flex" className={classes.cards}>
-      <Grid container spacing={3} >
+      <Grid container spacing={10} >
         {restaurantArray ? (
           restaurantArray.length > 0 ? (
             restaurantArray.map((restaurant) => getRestaurantCard(restaurant))

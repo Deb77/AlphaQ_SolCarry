@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '2px 4px',
         display: 'flex',
         alignContent: 'center',
-        width: '60%',
+        width: '55%',
         borderColor: '#E17E51' ,
         
       },
@@ -86,16 +86,16 @@ const Home =() => {
     const handleChangeCategory = (event) => {
         setCategory(event.target.value);
       };
-      const restaurantArray = [
-        {"name": "Adlem Goi Bar And Restaurant"},
-        {"name": "Sanman Restuarant And Bar"}, 
-        {"name": "Annapurna Multi Cuisine Family Restaurant with Bar"},
-      ]
-      const groceryArray = [
-        {"name": "Adlem Goi Bae And Restaurant"},
-        {"name": "Sanman Restuarant And Bar"}, 
-        {"name": "Annapurna Multi Cuisine Family Restaurant with Bar"},
-      ]
+      // const restaurantArray = [
+      //   {"name": "Adlem Goi Bar And Restaurant"},
+      //   {"name": "Sanman Restuarant And Bar"}, 
+      //   {"name": "Annapurna Multi Cuisine Family Restaurant with Bar"},
+      // ]
+      // const groceryArray = [
+      //   {"name": "Adlem Goi Bae And Restaurant"},
+      //   {"name": "Sanman Restuarant And Bar"}, 
+      //   {"name": "Annapurna Multi Cuisine Family Restaurant with Bar"},
+      // ]
     const handleChangeSearch = (event) => {
         setSearch(event.target.value);
       };
