@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { useLoadScript } from "@react-google-maps/api"
 
 const libraries = ["places"];
-const GOOGLE_API_KEY= "fakekey";//"AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU";
+const GOOGLE_API_KEY= "AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU";
 
 const GoogleMapsWrapper = ({setMapStatus}) => {
     const { isLoaded, loadError } = useLoadScript({

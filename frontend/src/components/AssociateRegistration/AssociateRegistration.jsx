@@ -10,6 +10,8 @@ import { Button } from '@material-ui/core';
 import {ReactComponent as MockMobile} from '../../Assets/signup.svg';
 import TypeSelect from './TypeSelect';
 import ImageUpload from './ImageUpload';
+import Axios from 'axios';
+
 
 const useStyles= makeStyles({
     container:{
@@ -48,10 +50,6 @@ const useStyles= makeStyles({
             fontWeight: '500',
             paddingLeft: '20px'
         }
-    },
-    rightContainer:{
-        paddingTop: '150px',
-        paddingBottom: '20px'
     },
     heading:{
         fontWeight: '400',
@@ -93,6 +91,11 @@ const useStyles= makeStyles({
     svg:{
         width: '450px',
         height: '450px'
+    },
+    input2:{
+        display: 'grid',
+        gridTemplateColumns: '70% 30%',
+        gridColumnGap: '5%',
     }
 });
 
@@ -102,14 +105,30 @@ const AssociateRegistration = ({mapStatus}) => {
         lng: 73.969542
     });
     const [name,setName]= useState('');
+    const [type,setType]= useState('');
     const [email,setEmail]= useState('');
     const [password,setPassword]= useState('');
+    const [imgageUrl,setImgageUrl]= useState('');
     const [error,setError]= useState(false);
+
+    const handleSubmit=()=>{
+        Axios.post('https://solcarry-backend.herokuapp.com/business/signup',{
+            name,email,password,type,
+            lat: location.lat.toString(),
+            long: location.lng.toString(),
+            image: imgageUrl
+        })
+        .then((response)=>{
+            console.log(response.data.token, response.data.user)
+        })
+        .catch((error)=>{
+            alert("Something went wrong")
+        })
+    };
 
     const styles= useStyles();
     return (
         <>
-        <ImageUpload />
             <h1 className={styles.heading}>Welcome Future <br/> Business Associate</h1>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>
@@ -123,8 +142,11 @@ const AssociateRegistration = ({mapStatus}) => {
                         <p>Confirm Password</p>
                         <ConfirmPassword Cpassword={password} />
                         <p>Business Type</p>
-                        <TypeSelect />
-                        <button
+                        <div className={styles.input2}>
+                            <TypeSelect type={type} setType={setType} />
+                            <ImageUpload setImgageUrl={setImgageUrl} />
+                        </div>
+                        <button onClick={handleSubmit}
                         className={styles.submitButton} //variant="contained" color="primary">
                          >   Submit
                         </button>
@@ -133,7 +155,7 @@ const AssociateRegistration = ({mapStatus}) => {
                 <div className={styles.rightContainer}>
                 {
                 mapStatus?
-                <Map location={location} setLocation={setLocation} />:
+                <Map location={location} setLocation={setLocation} height='600px' />:
                 <h1>Loading</h1>
                 }
                 </div>

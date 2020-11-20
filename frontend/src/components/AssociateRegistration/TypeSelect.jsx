@@ -18,11 +18,18 @@ const CustomSelect= styled(Select)({
     }
 });
 
-//MuiInput-underline:hover:not(.Mui-disabled):before .MuiInput-underline:before
-const TypeSelect = () => {
+
+const TypeSelect = ({type, setType}) => {
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
+  
     return (
         <FormControl>
         <CustomSelect
+          value={type}
+          onChange={handleChange}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
         >

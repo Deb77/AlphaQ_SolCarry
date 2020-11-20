@@ -90,7 +90,7 @@ const DriverPortal = ({ mapStatus }) => {
             </div>
             {
                 mapStatus?
-                <Map location={location} setLocation={setLocation} />:
+                <Map location={location} setLocation={setLocation} height='500px' />:
                 <h1>Loading</h1>
             }
             <div className={styles.details2}>

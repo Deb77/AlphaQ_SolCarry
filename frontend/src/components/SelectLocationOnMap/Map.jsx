@@ -8,7 +8,7 @@ const GOA_BOUNDS={
     east: 74.36,
 };
 
-const Map = ({location, setLocation}) => {
+const Map = ({location, setLocation,height}) => {
     const [currentLocation, setCurrentLocation]= useState({
         lat: 15.292158,
         lng: 73.969542
@@ -57,7 +57,7 @@ const Map = ({location, setLocation}) => {
             }
         }
         zoom={1}
-        mapContainerStyle={{height:'500px', width: '100%'}}
+        mapContainerStyle={{height, width: '100%'}}
         center={currentLocation}>
             <Marker position={location} />
         </GoogleMap>
