@@ -1,6 +1,6 @@
 import React from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles, StylesProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Counter from './Counter'
 
 const useStyles = makeStyles(() => ({
