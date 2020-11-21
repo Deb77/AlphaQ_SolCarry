@@ -26,9 +26,9 @@ const useStyles = makeStyles({
     fontSize: 20,
   },
   root: {
-    width: 900,
+    width: 800,
     marginTop: 60,
-    marginLeft: 60
+    marginLeft: 150
   },
   media: {
     height: 450,
@@ -77,7 +77,16 @@ function Restaurant({setItems,businessDeails,businessId}) {
             <Grid item xs={5}>
               <Typography className={classes.rightheading}>{businessDeails.name}</Typography>
               <Typography className={classes.rightdesc}>
-                {businessDeails.description}
+              {businessDeails.tags}
+              </Typography>
+              <Typography className={classes.rightdesc}>
+                Address: {businessDeails.address}
+              </Typography>
+              <Typography className={classes.rightdesc}>
+                Status: {businessDeails.status}
+              </Typography>
+              <Typography className={classes.rightdesc}>
+                Contact: {businessDeails.contact}
               </Typography>
             </Grid>
             </Grid>
