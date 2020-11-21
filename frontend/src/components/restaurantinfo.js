@@ -42,7 +42,7 @@ function Restaurant({setItems,businessDeails,businessId}) {
 
   useEffect(()=>{
     console.log('mounted')
-    Axios.post('https://solcarry-backend.herokuapp.com/item',{
+    Axios.post('http://solcarry-backend.herokuapp.com/item/specific',{
       businessId: businessId
     })
     .then(response=>setDisplayItems(response.data))
