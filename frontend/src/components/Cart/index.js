@@ -131,9 +131,9 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
             service.getDistanceMatrix(options, (response, status)=>{
                 console.log(response)
                 if(status==='OK'){
-                    if(response.rows[0].elements[0].status==='OK' && response.rows[0].elements[0].status==='OK'){
+                    if(response.rows[0].elements[0].status==='OK' && response.rows[1].elements[1].status==='OK'){
                     const driverToRestaurant= response.rows[0].elements[0].duration.value;//driver to restaurant
-                    const restaurantToUser= response.rows[0].elements[1].duration.value;//restaurant to user
+                    const restaurantToUser= response.rows[1].elements[1].duration.value;//restaurant to user
                     setTotalTime(driverToRestaurant+restaurantToUser);
                     }
                 }

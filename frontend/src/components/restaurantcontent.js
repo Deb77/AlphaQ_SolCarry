@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 
+import {filter,orderBy} from 'lodash'
+
 
 //custom
 import RestaurantCard from "./restaurantcard";
@@ -25,17 +27,45 @@ const useStyles = makeStyles({
         paddingBottom: 180,
     }
   });
-const RestaurantContent = ({setBusinessDeails}) => {
+const RestaurantContent = ({setBusinessDeails, location, category, mapStatus}) => {
   const [restaurantArray, setRestaurantArray] = useState([]);
+  const [restaurantApiResults, setRestaurantApiResults] = useState([]);
   useEffect(() => {
     axios.get('https://solcarry-backend.herokuapp.com/business')
-    .then(res => setRestaurantArray(res.data))
+    .then(res => setRestaurantApiResults(res.data))
   }, [])
-  // const restaurantArray = [
 
-  // ]
-//   const { restaurants } = useSelector((state) => state.data);
-//   const restaurantArray = restaurants.restaurants;
+  useEffect(()=>{
+    if (mapStatus){
+    let businesses= filter(restaurantApiResults,(o)=>o.type===category);
+    let originsArray=[];
+    businesses.forEach((value)=>{
+      originsArray.push({lat: parseFloat(value.lat), lng:parseFloat(value.long)})
+    });
+    const options={
+      origins: originsArray,
+      destinations: [location], //.[restaurantlocation, user location]
+      travelMode: 'DRIVING',
+      }  
+      var service = new window.google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(options, (response, status)=>{
+          console.log(response)
+          if(status==='OK'){
+            for(let i=0;i<businesses.length;i++){
+              if(response.rows[i].elements[0].status==='OK'){
+                businesses[i].__v=(response.rows[0].elements[0].duration.value);
+              }
+              else
+                  businesses[i].__v=(999999999999999);
+              }
+              let sortedBusinesses= orderBy(businesses,['__v'])
+              setRestaurantArray(sortedBusinesses);
+           }
+      });
+
+    }
+  },[restaurantApiResults,location,category,mapStatus]);
+
 const classes = useStyles();
 
   const getRestaurantCard = (restaurantObj) => {
