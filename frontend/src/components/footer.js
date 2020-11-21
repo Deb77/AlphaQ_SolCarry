@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#E17E51',
     color: "white",
-    marginTop: 10,
+    marginTop: 60,
     height: "42vh",
     textAlign: "center",
     
@@ -65,7 +65,7 @@ export default function Footer() {
             </Typography>
             <Typography variant="body1" component="p" className={classes.para}>
             Register with SOLCARRY and take your business to the next level.
-Online Delivery Platform tailored for the goan market.
+            Online Delivery Platform tailored for the goan market.
             </Typography>
             <br />
             <Link to="/associateRegistration" className={classes.link}>
@@ -80,8 +80,7 @@ Online Delivery Platform tailored for the goan market.
               <span className={classes.logo}>SOLCARRY</span> For Drivers
             </Typography>
             <Typography variant="body1" component="p" className={classes.para}>
-              Get more out of your business, without losing focus on what is
-              most important — delighting your customers
+                Supliment your earnings by provinging deliveries to those in need.
             </Typography>
             <br />
             <Link to="/driverRegistration" className={classes.link}>
