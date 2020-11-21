@@ -31,6 +31,7 @@ const App = () => {
   const [mapStatus, setMapStatus]= useState(false);
   const [items, setItems] = useState([]);
   const [businessDeails, setBusinessDeails]= useState(null);
+  const [businessId, setbusinessId]= useState(null);
 
   return (
     <Provider store={store}>
@@ -55,7 +56,7 @@ const App = () => {
           <Route path='/driverRegistration'>
             <DriverRegistration />
           </Route>
-          <Route path='/' exact render={()=><Home mapStatus={mapStatus} setBusinessDeails={setBusinessDeails} />}>
+          <Route path='/' exact render={()=><Home mapStatus={mapStatus} setbusinessId={setbusinessId} setBusinessDeails={setBusinessDeails} />}>
           </Route>
           <Route path='/login' exact component={Login}>
           </Route>
@@ -65,7 +66,7 @@ const App = () => {
           />
           <Route exact path="/hooray" component={Confirmation} />
           <Route exact path="/Business/:restName" 
-          render={()=><Restaurant setItems={setItems} businessDeails={businessDeails} />} />
+          render={()=><Restaurant setItems={setItems} businessId={businessId} businessDeails={businessDeails} />} />
           
         </Switch>
         {/* <footer>

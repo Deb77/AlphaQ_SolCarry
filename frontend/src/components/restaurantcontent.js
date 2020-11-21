@@ -27,7 +27,7 @@ const useStyles = makeStyles({
         paddingBottom: 180,
     }
   });
-const RestaurantContent = ({setBusinessDeails, location, category, mapStatus}) => {
+const RestaurantContent = ({setBusinessDeails, location, category, mapStatus, setbusinessId}) => {
   const [restaurantArray, setRestaurantArray] = useState([]);
   const [restaurantApiResults, setRestaurantApiResults] = useState([]);
   useEffect(() => {
@@ -70,9 +70,14 @@ const RestaurantContent = ({setBusinessDeails, location, category, mapStatus}) =
 
 const classes = useStyles();
 
+  const handleSelectValue= (value)=>{
+    setBusinessDeails(value)
+    setbusinessId(value._id)
+  }
+
   const getRestaurantCard = (restaurantObj) => {
     return (
-      <Grid item xs={12} sm={4} key={restaurantObj._id} onClick={()=>setBusinessDeails(restaurantObj)} >
+      <Grid item xs={12} sm={4} key={restaurantObj._id} onClick={()=>handleSelectValue(restaurantObj)} >
         <RestaurantCard {...restaurantObj} />
       </Grid>
     );

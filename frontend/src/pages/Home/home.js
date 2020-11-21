@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
           paddingLeft: 180
       }
  }));
-const Home =({mapStatus, setBusinessDeails}) => {
+const Home =({mapStatus, setBusinessDeails, setbusinessId}) => {
     
 
     const classes = useStyles();
@@ -172,7 +172,7 @@ const Home =({mapStatus, setBusinessDeails}) => {
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            <RestaurantContent mapStatus={mapStatus} location={currentLocation} category={category} setBusinessDeails={setBusinessDeails}  />
+            <RestaurantContent setbusinessId={setbusinessId} mapStatus={mapStatus} location={currentLocation} category={category} setBusinessDeails={setBusinessDeails}  />
             </Box>
             
            <Footer />
