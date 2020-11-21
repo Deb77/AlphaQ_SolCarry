@@ -34,7 +34,7 @@ export default function RestaurantCard(props) {
     const classes = useStyles();
     const {
       name,
-      description,
+      tags,
       image,
       _id,
     } = props;
@@ -65,7 +65,7 @@ export default function RestaurantCard(props) {
                 {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p" className={classes.linkt}>
-                {description}
+                {tags}
                 </Typography>
                 </CardContent>
             </Link>

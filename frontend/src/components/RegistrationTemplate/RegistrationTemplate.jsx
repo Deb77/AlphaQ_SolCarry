@@ -24,7 +24,7 @@ const useStyles= makeStyles({
         '& .MuiFormControl-root':{
             boxSizing: 'border-box',
             backgroundColor: '#fff',
-            borderRadius: '40px',
+            borderRadius: '5px',
             padding: '0px',
             border: '0.01px solid rgba(0,0,0,0.25)',
             width: '100%'

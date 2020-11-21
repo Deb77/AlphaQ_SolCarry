@@ -37,13 +37,13 @@ const RestaurantContent = ({setBusinessDeails, location, category, mapStatus, se
 
   useEffect(()=>{
     if (mapStatus){
-    let businesses= [...restaurantApiResults]//filter(restaurantApiResults,(o)=>o.type===category);
+      let businesses= filter(restaurantApiResults,(o)=>o.type===category);
     let originsArray=[];
     businesses.forEach((value)=>{
       originsArray.push({lat: parseFloat(value.lat), lng:parseFloat(value.long)})
     });
-    let options={
-    origins: [...originsArray],
+    const options={
+      origins: originsArray,
       destinations: [location], //.[restaurantlocation, user location]
       travelMode: 'DRIVING',
     };
