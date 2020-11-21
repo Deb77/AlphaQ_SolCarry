@@ -14,6 +14,7 @@ const useStyles = makeStyles({
         textDecoration: 'none',
         marginBottom: 50,
         height:340,
+        width: 500
       },
       mediac: {
         height: 250,

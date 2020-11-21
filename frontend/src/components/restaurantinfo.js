@@ -25,12 +25,13 @@ const useStyles = makeStyles({
     fontSize: 20,
   },
   root: {
-    maxWidth: '80%',
+    width: 900,
     marginTop: 60,
     marginLeft: 60
   },
   media: {
     height: 450,
+    width: 900,
   },
 });
 
