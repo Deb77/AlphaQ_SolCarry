@@ -18,6 +18,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Navbar from '../../components/navbar';
 import RestaurantContent from "../../components/restaurantcontent";
 import GetUserLocation from '../../components/SelectLocationOnMap/GetUserLocation';
+import Footer from '../../components/footer';
 
 const categories = [
     {
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
  }));
 const Home =({mapStatus, setBusinessDeails}) => {
     
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
     const [category, setCategory] = React.useState('Restaurant');
@@ -290,7 +291,7 @@ const Home =({mapStatus, setBusinessDeails}) => {
             <RestaurantContent setBusinessDeails={setBusinessDeails}  />
             </Box>
             
-           
+           <Footer />
         </Fragment>
     )    
 };

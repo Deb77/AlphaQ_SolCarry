@@ -1,6 +1,4 @@
 import React,{useState, useEffect} from "react";
-//redux
-import { useSelector } from "react-redux";
 
 //material-ui
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -61,7 +59,6 @@ function Restaurant({setItems,businessDeails}) {
 
   return (
     <>
-    <Link to='/cart'>CART</Link>
           <Navbar />
           {/* <Grid container direction="row">
             <Grid item xs={false} sm={1} />
