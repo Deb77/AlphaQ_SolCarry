@@ -5,6 +5,7 @@ const router = Router();
 
 router
     .get('/', businessController.find_all_get)
+    .get('/:id', businessController.find_get)
     .post('/signup', businessController.signup_post)
     .post('/login', businessController.login_post)
     .get('/filter', businessController.filter_get);

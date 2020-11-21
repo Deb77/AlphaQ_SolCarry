@@ -26,6 +26,16 @@ const handleErrors = (err) => {
     return errors;
 }
 
+module.exports.find_get = async (req, res) => {
+    try {
+        const business = await Business.findById(req.params.id);
+        res.status(201).json(business);
+    }
+    catch (err) {
+        res.status(400).json("THe restaurant has no items");
+    }
+}
+
 module.exports.find_all_get = async (req, res) => {
     try {
         const business = await Business.find();

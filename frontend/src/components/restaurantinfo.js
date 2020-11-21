@@ -1,6 +1,4 @@
 import React,{useState, useEffect} from "react";
-//redux
-import { useSelector } from "react-redux";
 
 //material-ui
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -12,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 //custom
 import Navbar from './navbar';
+import Footer from './footer';
 import Item from './ItemCard';
 import { Link } from "react-router-dom";
 import Axios from "axios";
@@ -27,12 +26,13 @@ const useStyles = makeStyles({
     fontSize: 20,
   },
   root: {
-    maxWidth: '80%',
+    width: 900,
     marginTop: 60,
     marginLeft: 60
   },
   media: {
     height: 450,
+
   },
 });
 
@@ -62,51 +62,7 @@ function Restaurant({setItems,businessDeails}) {
 
   return (
     <>
-    <Link to='/cart'>Cart</Link>
           <Navbar />
-          {/* <Grid container direction="row">
-            <Grid item xs={false} sm={1} />
-            <Grid item xs={12} sm={6} style={{ marginTop: 120 }}>
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="h2"
-                style={{ fontStyle: "bold" }}
-              >
-                AJ's
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Costs Rs.{costForOne} for one
-              </Typography>
-              <Typography variant="body2" color="textPrimary">
-                Minimum order Rs.{minOrderAmount}
-              </Typography>
-              <Typography variant="body2" color="textPrimary">
-                {paymentString}
-              </Typography>
-              <br />
-              <Typography variant="body2" color="textPrimary">
-                Address: {addressString}
-              </Typography>
-              <Typography variant="body2" color="textPrimary">
-                Call: +91 {phoneNo}
-              </Typography>
-              <Typography variant="body2" color="textPrimary">
-                Dine-In Timing: 1pm to 12am 
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={4} style={{ marginTop: 34 }}>
-              {imageUrl ? (
-                <SwipeableImages images={imageUrl} type="restaurant" />
-              ) : null}
-            </Grid>
-            <div className={classes.borderLeft}></div>
-            <div className={classes.borderBottom}></div>
-            <Grid item xs={false} sm={1} />
-          </Grid> */}
           <Grid container style={{marginBottom: '20px'}}>
             <Grid item xs={7}>
             <Card className={classes.root}>
@@ -134,6 +90,7 @@ function Restaurant({setItems,businessDeails}) {
                 ))
               }
             </Grid>
+            <Footer />
     </>
   );
 }
