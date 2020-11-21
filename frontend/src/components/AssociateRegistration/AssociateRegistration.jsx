@@ -36,7 +36,7 @@ const useStyles= makeStyles({
         '& .MuiFormControl-root':{
             boxSizing: 'border-box',
             backgroundColor: '#fff',
-            borderRadius: '40px',
+            borderRadius: '5px',
             padding: '0px'
         },
         '& .MuiOutlinedInput-notchedOutline':{
@@ -48,7 +48,7 @@ const useStyles= makeStyles({
         '& p':{
             margin: '0',
             fontWeight: '500',
-            paddingLeft: '20px'
+            paddingLeft: '2px'
         }
     },
     heading:{
@@ -62,7 +62,7 @@ const useStyles= makeStyles({
         fontFamily: 'weasthood',
         fontSize: '22px',
         letterSpacing: '2px',
-        borderRadius: '30px',
+        borderRadius: '5px',
         margin: '40px 0',
         border: '0',
         outline: '0',
