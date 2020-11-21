@@ -65,29 +65,56 @@ module.exports.stats_update = async (req, res) => {
 
 module.exports.closest_get = async (req, res) => { 
     try {
-        const curlat = req.body.lat;
-        const curlong = req.body.long;
+    //     const curlat = req.body.lat;
+    //     const curlong = req.body.long;
 
-        const drivers = await Driver.find({ available: true });
-        const locations = new Array(drivers.length);
-        let promises = [];
+    //     const drivers = await Driver.find({ available: true });
+    //     const locations = new Array(drivers.length);
+    //     let promises = [];
         
-    for (i = 0; i < drivers.length; i++){
-        const { lat, long } = drivers[i];
-        promises.push(
-            axios.post(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat},${long}&destinations=${curlat},${curlong}&key=AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU`)
-                .then(({data}) => locations[i] = parseInt(data.rows[0].elements[0].distance.text.split(" ")[0]))
-        );
-    }
-        const distance = await Promise.all(promises);
-        let driver = '';
+    // for (i = 0; i < drivers.length; i++){
+    //     const { lat, long } = drivers[i];
+    //     promises.push(
+    //         axios.post(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat},${long}&destinations=${curlat},${curlong}&key=AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU`)
+    //             .then(({data}) => locations[i] = parseInt(data.rows[0].elements[0].distance.text.split(" ")[0]))
+    //     );
+    // }
+    //     const distance = await Promise.all(promises);
+    //     let driver = '';
 
-        for (i = 0; i < distance.length -1 ; i++){
-            if (distance[i] > distance[i + 1]) {
-                driver = drivers[i + 1];
+    //     for (i = 0; i < distance.length  ; i++){
+    //         if (distance[i] > distance[i + 1]) {
+    //             driver = drivers[i + 1];
+    //         }
+    //     }
+        const drivers = await Driver.find({ available: true });
+        let cor = "";
+        const lat = req.body.lat;
+        const long = req.body.long;
+        
+        for (i = 0; i < drivers.length; i++) {
+            if (i === drivers.length-1) {
+                cor += drivers[i].lat + ',' + drivers[i].long;
+            }
+            else { 
+                cor += drivers[i].lat + ',' + drivers[i].long + '|';
+            } 
+        }
+
+        const { data } = await axios.post(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${cor}&destinations=${lat},${long}&departure_time=now&key=AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU`)
+
+        const rows = data.rows;
+        
+        let closestDriver = 0;
+        let distance = rows[0].elements[0].distance.value
+        for (i = 0; i < rows.length; i++){
+            if (rows[i].elements[0].distance.value < distance) {
+                distance = rows[i].elements[0].distance.value;
+                closestDriver = i;
             }
         }
-        res.status(200).json({ driver: driver})
+        res.status(200).json({driver:drivers[closestDriver]});
+
     }
     catch (err) {
         res.status(400).json("Driver not found");
