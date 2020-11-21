@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
  }));
 const Home =({mapStatus, setBusinessDeails}) => {
     
-    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
     const [category, setCategory] = React.useState('Restaurant');
@@ -89,7 +88,9 @@ const Home =({mapStatus, setBusinessDeails}) => {
         let geocoder= new window.google.maps.Geocoder();
         geocoder.geocode({location:currentLocation},(result, status)=>{//gets address from lat lng
             if(status ==='OK'){
-              setLocationPlaceholder(result[0].formatted_address[0].long_name)
+              console.log(result)
+
+              setLocationPlaceholder(result[0].address_components[2].long_name)
             }
         })
       }
@@ -169,125 +170,7 @@ const Home =({mapStatus, setBusinessDeails}) => {
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            {/* <Grid container className={classes.cards}>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Adlem Goi Bar And Restaurant
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Chinese, Goan, Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Sanman Restuarant And Bar
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Goan, North Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Annapurna Multi Cuisine Family Restaurant with Bar
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Chinese, Goan, Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-            </Grid>
-            <Grid container className={classes.cards}>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Adlem Goi Bar And Restaurant
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Chinese, Goan, Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Sanman Restuarant And Bar
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Goan, North Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-                <Grid item xs={4}>
-                <Card className={classes.rootc}>
-                <CardActionArea>
-                    <CardMedia
-                    className={classes.mediac}
-                    image={Burger}
-                    title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Annapurna Multi Cuisine Family Restaurant with Bar
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Chinese, Goan, Indian
-                    </Typography>
-                    </CardContent>
-                </CardActionArea>
-                </Card>
-                </Grid>
-            </Grid> */}
-            <RestaurantContent setBusinessDeails={setBusinessDeails}  />
+            <RestaurantContent mapStatus={mapStatus} location={currentLocation} category={category} setBusinessDeails={setBusinessDeails}  />
             </Box>
             
            
