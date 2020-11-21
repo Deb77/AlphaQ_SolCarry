@@ -37,32 +37,34 @@ const RestaurantContent = ({setBusinessDeails, location, category, mapStatus}) =
 
   useEffect(()=>{
     if (mapStatus){
-    let businesses= filter(restaurantApiResults,(o)=>o.type===category);
+    let businesses= [...restaurantApiResults]//filter(restaurantApiResults,(o)=>o.type===category);
     let originsArray=[];
     businesses.forEach((value)=>{
       originsArray.push({lat: parseFloat(value.lat), lng:parseFloat(value.long)})
     });
-    const options={
-      origins: originsArray,
+    let options={
+    origins: [...originsArray],
       destinations: [location], //.[restaurantlocation, user location]
       travelMode: 'DRIVING',
-      }  
+    };
+    if(originsArray.length !==0){
       var service = new window.google.maps.DistanceMatrixService();
       service.getDistanceMatrix(options, (response, status)=>{
           console.log(response)
           if(status==='OK'){
             for(let i=0;i<businesses.length;i++){
               if(response.rows[i].elements[0].status==='OK'){
-                businesses[i].__v=(response.rows[0].elements[0].duration.value);
+                businesses[i].__v=(response.rows[i].elements[0].duration.value);
               }
               else
                   businesses[i].__v=(999999999999999);
               }
-              let sortedBusinesses= orderBy(businesses,['__v'])
+              console.log(businesses)
+              let sortedBusinesses= orderBy(businesses,['__v'],['desc'])
               setRestaurantArray(sortedBusinesses);
            }
       });
-
+    }
     }
   },[restaurantApiResults,location,category,mapStatus]);
 

@@ -41,6 +41,7 @@ function Restaurant({setItems,businessDeails}) {
   const [DisplayItems, setDisplayItems]= useState([])
 
   useEffect(()=>{
+    console.log('mounted')
     Axios.get('https://solcarry-backend.herokuapp.com/item',{
       businessId: businessDeails._id
     })
@@ -61,7 +62,7 @@ function Restaurant({setItems,businessDeails}) {
 
   return (
     <>
-    <Link to='/cart'>CART</Link>
+    <Link to='/cart'>Cart</Link>
           <Navbar />
           {/* <Grid container direction="row">
             <Grid item xs={false} sm={1} />

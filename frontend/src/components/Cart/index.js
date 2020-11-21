@@ -121,12 +121,13 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
         if(mapStatus && businessDeails && driver){
             const options={
                 origins: [{ //driverlocation, restauramt
-                    lat: 0, 
-                    lng: 0 
-                },{lat: parseFloat(businessDeails.lat), long: parseFloat(businessDeails.long)}],
-                destinations: [{lat: parseFloat(businessDeails.lat), long: parseFloat(businessDeails.long)},location], //.[restaurantlocation, user location]
+                    lat: parseFloat(driver.lat), 
+                    lng: parseFloat(driver.long)
+                },{lat: parseFloat(businessDeails.lat), lng: parseFloat(businessDeails.long)}],
+                destinations: [{lat: parseFloat(businessDeails.lat), lng: parseFloat(businessDeails.long)},location], //.[restaurantlocation, user location]
                 travelMode: 'DRIVING',
             }  
+            console.log(options);
             var service = new window.google.maps.DistanceMatrixService();
             service.getDistanceMatrix(options, (response, status)=>{
                 console.log(response)
@@ -144,7 +145,7 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
     const secondsToHms=()=> {
         if(totalTime===0)
             return('ETA: --')
-        let d = Number(totalTime);
+        let d = Number(totalTime+900);
         var h = Math.floor(d / 3600);
         var m = Math.floor(d % 3600 / 60);
     
@@ -161,10 +162,10 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
     const driverPageRedirect= ()=>{
         setModalOpen(true)
         axios.post('https://solcarry-backend.herokuapp.com/driver/closest',{
-            lat: businessDeails.lat,
-            long: businessDeails.long
+            lat: parseFloat(businessDeails.lat),
+            long: parseFloat(businessDeails.long)
         })
-        .then((response)=>setDriver(response.data))
+        .then((response)=>setDriver(response.data.driver))
     }
 
     const handleSubmit= ()=>{

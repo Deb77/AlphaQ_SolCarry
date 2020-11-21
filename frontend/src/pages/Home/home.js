@@ -80,8 +80,8 @@ const Home =({mapStatus, setBusinessDeails}) => {
     const [search, setSearch] = React.useState('');
     const [locationPlaceholder, setLocationPlaceholder] = React.useState('Goa');
     const [currentLocation, setCurrentLocation] = React.useState({
-      lat: 15.292158,
-      lng: 73.969542
+      lat: 15.462483, 
+      lng: 73.804729
     });
     useEffect(()=>{
       if(mapStatus){ //map not initialised yet
