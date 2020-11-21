@@ -6,10 +6,6 @@ const itemSchema = Schema({
         type: String,
         required: [true, "Please item name"],
     },
-    description: {
-        type: String,
-        required: [true, "Please enter item's description"],
-    },
     businessId: {
         type: Schema.Types.ObjectId,
         required: true

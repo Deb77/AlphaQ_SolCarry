@@ -179,6 +179,7 @@ const Cart = ({ items, setItems,mapStatus,businessDeails}) => {
                 var r = new RegExp(' Goa ');
                 if(r.test(result[0].formatted_address)){
                     //axios.post('https://solcarry-backend.herokuapp.com/business/signup')
+                    //ORDER DETAILS REQUEST
                     setItems([]);
                     history.push("/hooray");
                 }

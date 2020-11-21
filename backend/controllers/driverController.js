@@ -1,5 +1,6 @@
 const Driver = require('../models/Driver');
 const authToken = require('../utils/authToken');
+const axios = require('axios');
 
 const handleErrors = (err) => {
     let errors = { name: '', email: '', password: '' };
@@ -54,10 +55,41 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.stats_update = async (req, res) => {
     try {
-        await Driver.findByIdAndUpdate(req.params.id, req.body);
-        res.status(201).json("The driver's information has been updated successfully");
+        const driver = await Driver.findByIdAndUpdate(req.params.id, req.body);
+        res.status(201).json({driver: driver});
     }
     catch (err) {
         res.status(400).json("We were unable to update");
     }
 };
+
+module.exports.closest_get = async (req, res) => { 
+    try {
+        const curlat = req.body.lat;
+        const curlong = req.body.long;
+
+        const drivers = await Driver.find({ available: true });
+        const locations = new Array(drivers.length);
+        let promises = [];
+        
+    for (i = 0; i < drivers.length; i++){
+        const { lat, long } = drivers[i];
+        promises.push(
+            axios.post(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat},${long}&destinations=${curlat},${curlong}&key=AIzaSyAX5oDs8RabZB7o1H1OJvPkENC3ugJhsZU`)
+                .then(({data}) => locations[i] = parseInt(data.rows[0].elements[0].distance.text.split(" ")[0]))
+        );
+    }
+        const distance = await Promise.all(promises);
+        let driver = '';
+
+        for (i = 0; i < distance.length -1 ; i++){
+            if (distance[i] > distance[i + 1]) {
+                driver = drivers[i + 1];
+            }
+        }
+        res.status(200).json({ driver: driver})
+    }
+    catch (err) {
+        res.status(400).json("Driver not found");
+    }
+}
