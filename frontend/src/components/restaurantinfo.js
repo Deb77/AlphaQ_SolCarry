@@ -36,17 +36,18 @@ const useStyles = makeStyles({
   },
 });
 
-function Restaurant({setItems,businessDeails}) {
+function Restaurant({setItems,businessDeails,businessId}) {
   const classes = useStyles();
   const [DisplayItems, setDisplayItems]= useState([])
 
   useEffect(()=>{
     console.log('mounted')
-    Axios.get('https://solcarry-backend.herokuapp.com/item',{
-      businessId: businessDeails._id
+    Axios.post('https://solcarry-backend.herokuapp.com/item',{
+      businessId: businessId
     })
     .then(response=>setDisplayItems(response.data))
-  },[businessDeails])
+    return(()=>setDisplayItems([]))
+  },[businessId])
 
   const addItem= (item,id)=>{
     let updatedDisplayItems= [...DisplayItems]
