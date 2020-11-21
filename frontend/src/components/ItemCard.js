@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ItemCard(props) {
+export default function ItemCard({details}) {
   const classes = useStyles();
   return (
     <>
@@ -51,7 +51,7 @@ export default function ItemCard(props) {
             ></Link>
       <CardMedia
         className={classes.cover}
-        image="https://i.ibb.co/wNrV34C/burger.png"
+        image={details.image}
         title="Live from space album cover"
       />
       <Link
@@ -67,10 +67,10 @@ export default function ItemCard(props) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Food
+            {details.name}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Price : 420
+            {`Price : ${details.price}`}
           </Typography>
         </CardContent>
       </div>

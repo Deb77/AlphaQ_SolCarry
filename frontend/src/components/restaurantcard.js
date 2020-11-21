@@ -48,7 +48,7 @@ export default function RestaurantCard(props) {
             <Link 
             className={classes.link}
             to={{
-                pathname: `restaurant/${restUrl}`,
+                pathname: `Business/${restUrl}`,
                 state: {
                 restId: _id,
                 },

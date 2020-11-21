@@ -63,6 +63,7 @@ const DriverPortal = ({ mapStatus }) => {
     const user = JSON.parse(localStorage.getItem('user')).user
 
     const handleLocationUpdate= ()=>{
+        console.log(user)
         if(!mapStatus){ //map not initialised yet
             return null
         }
@@ -74,8 +75,9 @@ const DriverPortal = ({ mapStatus }) => {
                 var r = new RegExp(' Goa ');
                 console.log(result)
                 if (r.test(result[0].formatted_address)) {
-                    axios.put(`https://solcarry-backend.herokuapp.com/driver/stats/${user}`, {
-                        lat: location.lat, lang: location.lang
+                    axios.put(`https://solcarry-backend.herokuapp.com/driver/stats/${user}`,{
+                        lat: location.lat.toString(), lng: location.lng.toString(),
+                        available: true
                     })
                         .then((setUpdatedTime(new Date())))
                 }
@@ -87,6 +89,9 @@ const DriverPortal = ({ mapStatus }) => {
     }
 
     const logout = () => { 
+        axios.put(`https://solcarry-backend.herokuapp.com/driver/stats/${user}`,{
+            available: false
+        })
         localStorage.removeItem("user");
         window.location.href='/'
     };

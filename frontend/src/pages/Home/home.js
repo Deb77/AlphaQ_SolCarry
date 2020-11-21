@@ -72,7 +72,9 @@ const useStyles = makeStyles((theme) => ({
           paddingLeft: 180
       }
  }));
-const Home =({mapStatus}) => {
+const Home =({mapStatus, setBusinessDeails}) => {
+    
+    const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
     const [category, setCategory] = React.useState('Restaurant');
@@ -122,7 +124,7 @@ const Home =({mapStatus}) => {
       const handleSubmit = (event) => {
         let restUrl = search.split(" ");
         restUrl = restUrl.join("-").toLowerCase();
-        history.push(`/${category}/${restUrl}`)};
+        history.push(`/Business/${restUrl}`)};
     return(
         
         <Fragment>
@@ -285,7 +287,7 @@ const Home =({mapStatus}) => {
                 </Card>
                 </Grid>
             </Grid> */}
-            <RestaurantContent />
+            <RestaurantContent setBusinessDeails={setBusinessDeails}  />
             </Box>
             
            
