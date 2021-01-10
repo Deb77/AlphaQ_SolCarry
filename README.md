@@ -7,7 +7,7 @@
   <h1 align="center">SolCarry</h1>
 
   <p align="center">
-    project_description
+    Buy from Local Businesses from the comfort of your Home
   </p>
 </p>
 
@@ -27,7 +27,12 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_26.png) <br />
+
+Solcarry, helps new and 
+existing business to bridge the gap between them and the people stuck at home, buy providing a platform to buy and sell.<br />
+**#Vocal_for_Local** <br /><br />
+![Workflow](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/workflow.png) <br />
 
 ### Built With
 
@@ -44,11 +49,13 @@
 + [Deepraj Bhosale](https://github.com/DeeprajB)
 + [Benito Coutinho](https://github.com/chickoocoutinho)
 
-## Usage
+## Screenshots
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_27.png)
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_29.png)
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_30.png)
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_31.png)
+![HomePage](https://github.com/Deb77/AlphaQ_SolCarry/blob/main/Screenshots/Screenshot_32.png)
 
 
 ## License
